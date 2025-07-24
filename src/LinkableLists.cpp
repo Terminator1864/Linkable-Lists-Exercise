@@ -216,7 +216,6 @@ int LinkableLists::pop() {
 // This Function Will Return The Last Element In The List Without Removing It
 // It Will Also Update The Tail Pointer To Point To The New Last Element
 // If The List Is Empty, It Will Return -1 Or An Appropriate Error Value
-
 int LinkableLists::peek() {
 
   // === Check If The Tail Pointer Is NULL ===
