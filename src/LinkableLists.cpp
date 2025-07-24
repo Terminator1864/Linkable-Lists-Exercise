@@ -36,7 +36,7 @@ LinkableLists::LinkableLists(int listArray[], int countElementsArray) {
   // This Loop Will Create New Nodes For Each Element In The Array
   // It Will Set The Data Of Each Node To The Corresponding Element In The Array, It Will Also Initialize 
   // The Previous And Next Pointers, Maintaining The Linkable Structure Of The List. 
-  for (int i=1; i<countElementsArray; i++) { // Loop Through The Array Elements Starting From Index 1
+  for (int i=0; i<countElementsArray; i++) { // Loop Through The Array Elements Starting From Index 0
 
     Node* newNode = new Node(); // Create A New Node For Each Element
     newNode -> data = listArray[i]; // Set The Data Of The New Node To The Corresponding Element In The Array
