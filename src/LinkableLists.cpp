@@ -15,6 +15,17 @@
 // It Also Initializes The Previous And Next Pointers For Each Node To Maintain The Linkable Structure
 LinkableLists::LinkableLists(int listArray[], int countElementsArray) {
 
+  // === Check If The Input Array Is Valid ===
+  // This Check Ensures That The Input Array Is Not NULL And The Count Of Elements Is Greater Than Zero
+  // If The Input Array Is Invalid, It Will Print An Error Message And Initialize The Head And Tail Pointers To NULL
+  // This Prevents The Program From Crashing Due To Invalid Input, Allowing For Graceful Handling Of Errors
+  if (listArray == nullptr || countElementsArray <= 0) {
+    std::cout << "[ERROR] Invalid Input Array Or Zero Count" << std::endl;
+    head = nullptr;
+    tail = nullptr;
+    return;
+  }
+
   head = new Node(); // Create A New Node For The Head
   head -> data = listArray[0]; // Initialize The Data Of The Head Node
   head -> previous = NULL; // The Head Node Has No Previous Node
@@ -43,6 +54,15 @@ LinkableLists::LinkableLists(int listArray[], int countElementsArray) {
 
 void LinkableLists::traversal() { // Traversal Function To Display The List In Forward Order
 
+  // === Check If The List Is Empty ===
+  // This Check Ensures That The List Is Not Empty Before Attempting To Traverse It 
+  // If The List Is Empty, It Will Print An Error Message And Return Without Performing Any Traversal
+  // This Prevents The Program From Crashing Due To Attempting To Access NULL Pointers
+  if (head == nullptr) {
+    std::cout << "[ERROR] List Is Empty – Nothing To Traverse" << std::endl;
+    return;
+  }
+
   Node *tmp = head; // Initialize A Temporary Pointer To The Head Node
   // Note: The Temporary Pointer Is In Use To Traverse The List Without Modifying The Head Pointer
   std::cout << "[LIST] Forwarding Display...." << std::endl;
@@ -65,6 +85,15 @@ void LinkableLists::traversal() { // Traversal Function To Display The List In F
 
 void LinkableLists::reversal() {
 
+  // === Check If The List Is Empty ===
+  // This Check Ensures That The List Is Not Empty Before Attempting To Reverse It
+  // If The List Is Empty, It Will Print An Error Message And Return Without Performing Any Reversal
+  // This Prevents The Program From Crashing Due To Attempting To Access NULL Pointers
+  if (tail == nullptr) {
+    std::cout << "[ERROR] List Is Empty – Nothing To Reverse" << std::endl;
+    return;
+  }
+
   Node *tmp = tail; // Initialize A Temporary Pointer To The Tail Node
   // Note: The Temporary Pointer Is In Use To Traverse The List Without Modifying The Tail Pointer
   std::cout << "[LIST] Reversing Display.... " << std::endl; // Print A Message Indicating That The Reversal Display Is In Progress
@@ -86,6 +115,19 @@ void LinkableLists::reversal() {
 // If The List Is Empty, It Will Initialize The Tail Pointer To Point To The New Element
 int LinkableLists::push_back(int newData) {
 
+  // === Check If The Tail Pointer Is NULL ===
+  // This Check Ensures That The Tail Pointer Is Not NULL Before Attempting To Add A New Element
+  // If The Tail Pointer Is NULL, It Indicates That The List Is Empty
+  if (tail == nullptr) {
+    std::cout << "[RECOVERY] Tail Was Null: Reinitializing List With First Node" << std::endl;
+    tail = new Node();
+    tail->data = newData;
+    tail->previous = nullptr;
+    tail->next = nullptr;
+    head = tail;
+    return newData;
+  }
+
   Node *q = new Node(); // Create A New Node For The New Element
   q -> data = newData; // Set The Data Of The New Node To The Latest Value
   q -> next = NULL; // The New Node Initially Points To NULL
@@ -101,6 +143,19 @@ int LinkableLists::push_back(int newData) {
 // It Will Also Update The Head Pointer To Point To The New First Element
 // If The List Is Empty, It Will Initialize The Head Pointer To Point To The New Element
 int LinkableLists::push_front(int newData) {
+
+  // === Check If The Head Pointer Is NULL ===
+  // This Check Ensures That The Head Pointer Is Not NULL Before Attempting To Add A New Element
+  // If The Head Pointer Is NULL, It Indicates That The List Is Empty, So We Initialize It
+  if (head == nullptr) {
+    std::cout << "[RECOVERY] Head Was Null – Reinitializing List With First Node" << std::endl;
+    head = new Node();
+    head->data = newData;
+    head->next = nullptr;
+    head->previous = nullptr;
+    tail = head;
+    return newData;
+  }
 
   Node *p = new Node(); // Create A New Node For The New Element
   p -> data = newData; // Set The Data Of The New Node To The Latest Value
@@ -121,6 +176,27 @@ int LinkableLists::push_front(int newData) {
 // It Will Also Update The Tail Pointer To Point To The New Last Element
 // If The List Is Empty, It Will Return -1 Or An Appropriate Error Value
 int LinkableLists::pop() {
+
+  // === Check If The Tail Pointer Is NULL ===
+  // This Check Ensures That The Tail Pointer Is Not NULL Before Attempting To Remove The Last Element
+  // If The Tail Pointer Is NULL, It Indicates That The List Is Empty
+  if (tail == nullptr) {
+    std::cout << "[ERROR] List Is Empty – Cannot Pop" << std::endl;
+    return -1;
+  }
+
+  // === Check If The Tail Pointer Is The Only Node In The List ===
+  // This Check Ensures That The Tail Pointer Is Not The Only Node In The List Before Attempting To Remove It
+  // If The Tail Pointer Is The Only Node, It Will Print A Warning Message And Set The Head And Tail Pointers To NULL
+  // This Prevents The Program From Crashing Due To Attempting To Access NULL Pointers
+  if (tail->previous == nullptr) {
+    std::cout << "[WARNING] Only One Node – List Will Now Become Empty" << std::endl;
+    int tmp = tail->data;
+    delete tail;
+    tail = nullptr;
+    head = nullptr;
+    return tmp;
+  }
 
   Node *L = tail; // Create A Temporary Pointer To The Tail Node
   int tmp = tail -> data; // Store The Data Of The Tail Node To Return Later
