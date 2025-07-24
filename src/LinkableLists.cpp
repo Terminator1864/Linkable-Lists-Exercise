@@ -219,6 +219,14 @@ int LinkableLists::pop() {
 
 int LinkableLists::peek() {
 
+  // === Check If The Tail Pointer Is NULL ===
+  // This Check Ensures That The Tail Pointer Is Not NULL Before Attempting To Peek At The Last Element
+  // If The Tail Pointer Is NULL, It Indicates That The List Is Empty
+  if (tail == nullptr) {
+    std::cout << "[ERROR] List Is Empty – Nothing To Peek" << std::endl;
+    return -1;
+  }
+
   std::cout << "[PEEK] Current Node's Status: " << tail -> data << std::endl; // Print The Data Of The Current Node
   return tail -> data; // Return The Data Of The Last Node In The List
 }
