@@ -51,7 +51,6 @@ LinkableLists::LinkableLists(int listArray[], int countElementsArray) {
 // This Function Will Display The List In Forward Order By Traversing From The Head To The Tail
 // It Will Print The Data Of Each Node Until It Reaches The Tail Node.
 // It Will Also Print A Message Indicating That The Forward Display Is In Progress
-
 void LinkableLists::traversal() { // Traversal Function To Display The List In Forward Order
 
   // === Check If The List Is Empty ===
@@ -82,7 +81,6 @@ void LinkableLists::traversal() { // Traversal Function To Display The List In F
 // This Function Will Display The List In Reverse Order By Traversing From The Tail To The Head
 // It Will Print The Data Of Each Node In Reverse Order Until It Reaches The Head Node
 // It Will Also Print A Message Indicating That The Reversal Display Is In Progress
-
 void LinkableLists::reversal() {
 
   // === Check If The List Is Empty ===
