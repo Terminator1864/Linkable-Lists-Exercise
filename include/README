@@ -1,37 +1,49 @@
+# Linkable Lists Exercise
+This Repository Contains An Exercise For Implementing Linkable Lists In C++ Using PlatformIO.
 
-This directory is intended for project header files.
+## 📖 Description
+This Project Provides A Comprehensive Implementation Of Linkable Lists, Showcasing Their Construction, Traversal, And Reversal Without Recursion. It Is Made To Be Modular, Allowing For Easy Understanding And Maintenance. The Code Is Set Up, To Facilitate Learning And Demonstration Of Key Concepts In Data Structures Using C++. The Implementation Is Made To Be Clear And Concise, Making It Suitable For Educational Purposes As Well As Practical Applications In C++ Programming.
 
-A header file is a file containing C declarations and macro definitions
-to be shared between several project source files. You request the use of a
-header file in your project source file (C, C++, etc) located in `src` folder
-by including it, with the C preprocessing directive `#include'.
+## ⚙️ Purpose
+This Program Demonstrates A Modular Implementation Of Linkable Lists Using C++ And PlatformIO.  
+It Shows How To Build, Traverse, And Reverse Linkable List Type - Data Structures Without Recursion.
 
-```src/main.c
+## 🛠️ Requirement
+- C++ Compiler (g++, clang++) & Among Others 
+- PlatformIO IDE: [PlatformIO](https://platformio.org/)
+- Basic Understanding Of C++ Programming Language
+- Basic Understanding Of Data Structures & Algorithms
+- Familiarity With OOP Programming Concepts
+- Familiarity With Linkable Lists & Their Operations
+- Familiarity With Dynamic Memory Management In C++
+- Familiarity With PlatformIO IDE & Its Configuration
+- Familiarity With Git Version Control
+- Familiarity With C++ Standard Library Features
+- Familiarity With Memory Management Using Pointers
 
-#include "header.h"
+## 📦 Folder Layout
+/include → Public Header Files
+/src → Source Code Files
+/lib → Optional Custom Libraries
+/test → Unit Test Placeholders
+.platformio.ini → PlatformIO Configuration File
+.gitignore → Ignore List For Git Version Control
 
-int main (void)
-{
- ...
-}
-```
+## 🧠 Features
+- Build A Linkable List With Dynamic Memory
+- Traverse Through The List From Start To End
+- Reverse The List Without Recursion
+- Follow Modular OOP Structure
+- Emphasize Code Readability And Maintainability
+- Use C++ Standard Library Features
+- Implement Basic Error Handling
+- Provide Clear Documentation And Comments
+- Use PlatformIO For Easy Compilation And Testing
+- Include Unit Tests For Key Functions
+- Demonstrate Memory Management Practices
+- Showcase Linkable List Operations
+- Provide Example Usage In Main Function
 
-Including a header file produces the same results as copying the header file
-into each source file that needs it. Such copying would be time-consuming
-and error-prone. With a header file, the related declarations appear
-in only one place. If they need to be changed, they can be changed in one
-place, and programs that include the header file will automatically use the
-new version when next recompiled. The header file eliminates the labor of
-finding and changing all the copies as well as the risk that a failure to
-find one copy will result in inconsistencies within a program.
+## 📄 License
+This Project Is Licensed Under The MIT License. See The [LICENSE](LICENSE) File For Details.
 
-In C, the convention is to give header files names that end with `.h'.
-
-Read more about using header files in official GCC documentation:
-
-* Include Syntax
-* Include Operation
-* Once-Only Headers
-* Computed Includes
-
-https://gcc.gnu.org/onlinedocs/cpp/Header-Files.html
