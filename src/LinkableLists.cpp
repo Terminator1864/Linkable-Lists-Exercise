@@ -6,7 +6,7 @@
 // === Including Necessary Header Files ===
 // This Code Includes The Header File For The LinkableLists Class To Use Its Functionality
 #include "Node.h" // Include The Header File For The Node Class
-#include "LinkableLists.h" // Include The Header File For The LinkableLists Class
+#include "LinkableLists.h"
 
 // === Constructor To Initialize The Linkable List With An Array ===
 // This Constructor Takes An Array And The Count Of Elements In The Array As Arguments
@@ -138,7 +138,7 @@ void LinkableLists<T>::pop_front() {
 
   // if the list is empty, do nothing
   if (this->head == nullptr) {
-      std::cout << "Empty list. Nothing to delete." << std::endl;
+      std::cout << "Empty List. Nothing To Delete." << std::endl;
       return;
   }
   
@@ -167,11 +167,11 @@ void LinkableLists<T>::pop_back() {
   }
   
   // if the list contains only one node, delete that one node
-  if (this->head == this->tail) { // or this->size == 1
+  if (this->tail == this->head) { // or this->size == 1
       // clear(); // delete the head and tail
-      delete this->tail; // or this->head
-      this->tail = nullptr;
+      delete this->head; // or this->head
       this->head = nullptr;
+      this->tail = nullptr;
   } else {
       // if the list contains more than one node, delete the head node
       Node<T>* temp = this->tail; // store the head node in a temporary variable
