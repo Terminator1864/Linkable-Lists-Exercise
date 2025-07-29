@@ -48,7 +48,7 @@ It Shows How To Build, Traverse, And Reverse Linkable List Type - Data Structure
 This Project Is Licensed Under The MIT License. See The [LICENSE](LICENSE) File For Details.
 
 ## 🧠 Coding Guidelines
-🧠 RULES: Where to Place Logic
+RULES: Where to Place Logic
 Feature	Goes In            .h?	     Goes In .cpp?	   Why?
 Function Signature Only	   ✅ Yes	        ❌ No	Exposes the interface only
 Full Function Body	       ❌ No	            ✅ Yes	Implementation stays private
@@ -58,7 +58,16 @@ Private Data Members	   ✅ Yes	        ❌ No	Must declare class shape
 
 ## 🧠 RULES: When To Use Getters/Setters
 You Want To...	Use A Getter/Setter?
-Read a private variable	✅ Getter
+Read a private variable	                    ✅ Getter
 Change a private value (with validation)	✅ Setter
-Expose something read-only	✅ Const Getter
-Access raw array index outside class	❌ BAD — always wrap
+Expose something read-only	                ✅ Const Getter
+Access raw array index outside class	    ❌ BAD — always wrap
+
+## 🧠 CONTROL STRUCTURE RULES
+Structure	Rule
+if	        Guard-first only. No nested success logic.
+while	    Must have a timeout escape + failsafe
+switch	    Must use break + default: clause
+for	        Must bounds-check all array accesses
+continue	Only inside timing-controlled loops
+return	    Used liberally for early exits (guard-first)

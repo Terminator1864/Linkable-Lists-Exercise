@@ -18,31 +18,49 @@ int main() {
   
   // === Create An Array And Initialize The LinkableLists Class ===
   // This Array Contains The Initial Elements To Populate The Linkable List
-  int listArray[] = {0, 1, 2, 3, 4}; // Initialize An Array With 5 Elements
+  int listArray1[] = {0, 1, 2, 3, 4}; // Initialize An Array With 5 Elements
   // Note: The Array Contains 5 Elements, Which Will Be In Use To Initialize The Linkable List
-  int countElementsArray = 0; // Count Of Elements In The Array
+  int countElementsArray1 = 0; // Count Of Elements In The Array
   // Note: The Count Of Elements In The Array Is Set To 0 Initially, But It Will Receive Updates Later
-  countElementsArray = 5; // Update The Count Of Elements In The Array To 5, As There Are 5 Elements In The Array
+  countElementsArray1 = 5; // Update The Count Of Elements In The Array To 5, As There Are 5 Elements In The Array
+
+  // === Create An Array And Initialize The LinkableLists Class ===
+  // This Array Contains The Initial Elements To Populate The Linkable List
+  char listArray2[] = {'A', 'B', 'C', 'D', 'E'}; // Initialize An Array With 5 Elements
+  // Note: The Array Contains 5 Elements, Which Will Be In Use To Initialize The Linkable List
+  int countElementsArray2 = 0; // Count Of Elements In The Array
+  // Note: The Count Of Elements In The Array Is Set To 0 Initially, But It Will Receive Updates Later
+  countElementsArray2 = 5; // Update The Count Of Elements In The Array To 5, As There Are 5 Elements In The Array
 
   // === Create An Instance Of The LinkableLists Class ===
   // This Instance Will Be Initialized With The Array And The Count Of Elements In The Array
-  LinkableLists myList(listArray, countElementsArray);
+  LinkableLists<int> myList1 = LinkableLists<int>();
 
-  myList.traversal(); // Call The Traversal Function To Display The List In Forward Order
+  // === Create An Instance Of The LinkableLists Class ===
+  // This Instance Will Be Initialized With The Array And The Count Of Elements In The Array
+  LinkableLists<char> myList2 = LinkableLists<char>();
 
-  myList.reversal(); // Call The Reversal Function To Display The List In Reverse Order
+  myList1.traversal(); // Call The Traversal Function To Display The List In Forward Order
 
-  myList.push_back(15); // Add A New Element (15) To The End Of The List
-  myList.traversal(); // Call The Traversal Function Again To Display The Latest Instance Of The List
+  myList1.reversal(); // Call The Reversal Function To Display The List In Reverse Order
 
-  myList.push_front(50); // Add A New Element (50) To The Front Of The List
-  myList.traversal(); // Call The Traversal Function Again To Display The Latest Instance Of The List
+  myList1.push_back(15); // Add A New Element (15) To The End Of The List
+  
+  myList1.push_front(50); // Add A New Element (50) To The Front Of The List
+  
+  myList1.pop_front(); // Remove The Last Element From The List
+  
+  myList1.pop_back(); 
 
-  myList.pop(); // Remove The Last Element From The List
-  myList.traversal(); // Call The Traversal Function Again To Display The Latest Instance Of The List
+  myList1.insert(10, 5); 
 
-  myList.peek(); // Peek At The Last Element In The List Without Removing It
-  myList.traversal(); // Call The Traversal Function Again To Display The Latest Instance Of The List
+  myList1.search(); 
+
+  myList1.get(2); 
+
+  myList1.remove(1, 1);
+
+  myList1.clear(); 
 
   return 0; // Return 0 To Indicate Successful Execution Of The Program
 }

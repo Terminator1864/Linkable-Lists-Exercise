@@ -8,6 +8,7 @@
 // === Define The Node Class ===
 // This Class Represents A Node In The Linkable List
 // Each Node Contains A Pointer To The Next Node, A Pointer To The Previous Node, And An Integer Data Field
+template<class T>
 class Node {
 
 // === Publicly Accessible Data Members ===
@@ -15,10 +16,21 @@ class Node {
 // This Is Useful For Traversing The List And Manipulating Nodes, Such As Adding Or Removing Elements
 public:
 
-  Node* next = nullptr; // Pointer ("Pointing" To The Address Location) To The Next Node In The Sequence
-  Node* previous = nullptr; // Pointer ("Pointing" To The Address Location) To Previous Node In The Sequence
-  int data; // Data Field To Store The Value Of The Node
-  int listSize = 0; // Integer Data Field To Store The Size Of The List
+  Node<T>* next = nullptr; // Pointer ("Pointing" To The Address Location) To The Next Node In The Sequence
+  Node<T>* prev = nullptr; // Pointer ("Pointing" To The Address Location) To Previous Node In The Sequence
+  T data; // Data Field To Store The Value Of The Node
+
+  Node() { // "Dummy Node - Temporary Node": So We Do Not Loose Track When changing About Nodes/Etc.
+      this->next = nullptr;
+      this->prev = nullptr;
+      this->data = T();
+  }
+
+  Node(T data) {
+      this->next = nullptr;
+      this->prev = nullptr; 
+      this->data = data;
+  }
 };
 
 #endif // End Of The NODE_H
