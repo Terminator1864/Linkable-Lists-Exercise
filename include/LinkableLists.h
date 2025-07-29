@@ -19,7 +19,6 @@ class LinkableLists {
 // This Is Useful For Traversing The List And Manipulating Nodes, Such As Adding Or Removing Elements
 public:
 
-
 // === Constructor To Initialize The Linkable List With An Array ===
 // This Constructor Takes An Array And The Count Of Elements In The Array As Arguments
 // It Initializes The Linkable List By Creating Nodes For Each Element In The Array
@@ -74,17 +73,27 @@ void reversal() {
   }
 }
 
-
+// === Search For An Element In The List ===
+// It Will Traverse The List And Check Each Node's Data Against The Search Criteria
+// If The Element Is Found, It Will Print A Message Indicating The Element's Position
+// If The Element Is Not Found, It Will Print A Message Indicating That The Element Was Not Found
 void search() {
+
+  std::cout << "[SYSTEM] Searching For An Element In The List" << std::endl;
 
 
 }
 
 
-
+// === Get The Element At A Specific Position In The List ===
+// It Will Traverse The List Until It Reaches The Specified Position
+// If The Position Is Valid, It Will Return The Data Of The Node At That Position
+// If The Position Is Invalid, It Will Print An Error Message
 void get(int pos) {
 
 
+
+  std::cout << "[SYSTEM] Getting Element At Position: " << pos << std::endl;
 }
 
 
@@ -142,9 +151,15 @@ void push_front(const T& data) {
   }
 }
 
+// === Insert An Element At A Specific Position In The List ===
+// It Will Traverse The List Until It Reaches The Specified Position
+// If The Position Is Valid, It Will Insert The New Node At That Position
+// If The Position Is Invalid, It Will Print An Error Message
 void insert(const T& data, int pos) {
 
 
+
+  std::cout << "[SYSTEM] Inserting Element At Position: " << pos << std::endl;
 }
 
 // === Remove The Last Element From The List And Return Its Value ===
@@ -217,23 +232,50 @@ void pop_back() {
   }
 }
 
+// === Remove An Element At A Specific Position In The List ===
+// It Will Traverse The List Until It Reaches The Specified Position
+// If The Position Is Valid, It Will Remove The Node At That Position
+// If The Position Is Invalid, It Will Print An Error Message
 void remove(int pos) {
 
 
+
+  std::cout << "[SYSTEM] Removing Element At Position: " << pos << std::endl;
 }
 
+// === Remove An Element With Specific Data From The List ===
+// This Function Will Be In Use To Remove An Element With Specific Data From The List
+// It Will Traverse The List And Check Each Node's Data Against The Given Data
+// If The Element Is Found, It Will Remove The Node Containing That Data
 void remove(const T& data) {
 
 
+
+  std::cout << "[SYSTEM] Removing Element With Data: " << data << std::endl;
 }
 
+// === Remove An Element With Specific Data At A Specific Position From The List ===
+// It Will Traverse The List Until It Reaches The Specific Position, Said By The User
+// If The Position Is Valid, It Will Remove The Node Containing That Data At That Position
+// If The Element Is Not Found, It Will Print A Message Indicating That The Element Was Not Found
 void remove(const T& data, int pos) {
 
 
+
+ 
+
+  std::cout << "[SYSTEM] Removing Element With Data: " << data << " At Position: " << pos << std::endl;
 }
 
+// === Clear The List By Removing All Elements ===
+// It Will Traverse The List And Delete Each Node
+// After Deleting All Nodes, It Will Set The Head And Tail Pointers To Null
+// It Will Also Reset The Size To 0
 void clear() {
 
+  std::cout << "[SYSTEM] Clearing The List" << std::endl;
+
+  
 
 }
 
