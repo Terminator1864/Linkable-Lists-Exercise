@@ -179,7 +179,7 @@ int LinkableLists::pop() {
   // This Check Ensures That The Tail Pointer Is Not NULL Before Attempting To Remove The Last Element
   // If The Tail Pointer Is NULL, It Indicates That The List Is Empty
   if (tail == nullptr) {
-    std::cout << "[ERROR] List Is Empty – Cannot Pop" << std::endl;
+    std::cout << "[ERROR] List Is Empty - Cannot Pop" << std::endl;
     return -1;
   }
 
@@ -188,7 +188,7 @@ int LinkableLists::pop() {
   // If The Tail Pointer Is The Only Node, It Will Print A Warning Message And Set The Head And Tail Pointers To NULL
   // This Prevents The Program From Crashing Due To Attempting To Access NULL Pointers
   if (tail->previous == nullptr) {
-    std::cout << "[WARNING] Only One Node – List Will Now Become Empty" << std::endl;
+    std::cout << "[WARNING] Only One Node - List Will Now Become Empty" << std::endl;
     int tmp = tail->data;
     delete tail;
     tail = nullptr;
@@ -220,7 +220,7 @@ int LinkableLists::peek() {
   // This Check Ensures That The Tail Pointer Is Not NULL Before Attempting To Peek At The Last Element
   // If The Tail Pointer Is NULL, It Indicates That The List Is Empty
   if (tail == nullptr) {
-    std::cout << "[ERROR] List Is Empty – Nothing To Peek" << std::endl;
+    std::cout << "[ERROR] List Is Empty - Nothing To Peek" << std::endl;
     return -1;
   }
 
