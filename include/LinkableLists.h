@@ -31,6 +31,8 @@ LinkableLists() {
   this->head = nullptr; // Initialize The Head Pointer To Null
   this->tail = nullptr; // Initialize The Tail Pointer To Null
   this->size = 0; // Initialize The Size To 0
+
+  std::cout << "[SYSTEM] LinkableLists Initialization: Successful" << std::endl;
 }
 
 // === Traversal Function To Display The List In Forward Order ===
@@ -39,7 +41,7 @@ LinkableLists() {
 // It Will Also Print A Message Indicating That The Forward Display Is In Progress
 void traversal() { // Traversal Function To Display The List In Forward Order
 
-  std::cout << "[SYSTEM] Forward Display In Progress" << std::endl;
+  std::cout << "[SYSTEM] Traversing Display: In Progress" << std::endl;
 
   Node<T>* node = this->head; // Create Pointer That Starts At The Head Of The List  
 
@@ -49,9 +51,11 @@ void traversal() { // Traversal Function To Display The List In Forward Order
   while (node != nullptr) {
 
     // print the data of the current node
-    std::cout << "Current Data: " << node->data << std::endl; 
+    std::cout << "Current Data(Traversal): " << node->data << std::endl; 
     node = node->next; // Move The Node Pointer To The Next Node In The List
   }
+
+  std::cout << "[SYSTEM] Traversing Display: Complete" << std::endl;
 }
 
 // === Reversal Function To Display The List In Reverse Order ===
@@ -60,7 +64,7 @@ void traversal() { // Traversal Function To Display The List In Forward Order
 // It Will Also Print A Message Indicating That The Reversal Display Is In Progress
 void reversal() {
 
-  std::cout << "[SYSTEM] Reversal Display In Progress" << std::endl;
+  std::cout << "[SYSTEM] Reversal Display: In Progress" << std::endl;
 
   Node<T>* node = this->tail; // Create Pointer That Starts At The Tail Of The List
 
@@ -68,9 +72,11 @@ void reversal() {
   // This Loop Will Continue Until The Node Pointer Reaches The Beginning Of The List (nullptr)
   while (node != nullptr) {
    
-    std::cout << "Current Data: " << node->data << std::endl; 
+    std::cout << "Current Data(Reversal): " << node->data << std::endl; 
     node = node->prev; // Move The Node Pointer To The Previous Node In The List
   }
+
+  std::cout << "[SYSTEM] Reversal Display: Complete" << std::endl;
 }
 
 // === Search For An Element In The List ===
@@ -82,6 +88,8 @@ void search() {
   std::cout << "[SYSTEM] Searching For An Element In The List" << std::endl;
 
 
+
+  std::cout << "[SYSTEM] Search Operation: Complete" << std::endl;
 }
 
 
@@ -91,9 +99,11 @@ void search() {
 // If The Position Is Invalid, It Will Print An Error Message
 void get(int pos) {
 
-
-
   std::cout << "[SYSTEM] Getting Element At Position: " << pos << std::endl;
+
+
+
+  std::cout << "[SYSTEM] Get Operation: Complete" << std::endl;
 }
 
 
@@ -103,7 +113,8 @@ void get(int pos) {
 // If The List Is Empty, It Will Initialize The Tail Pointer To Point To The New Element
 void push_back(const T& data) {
 
-  std::cout << "[SYSTEM] Adding New Element To The End Of The List" << std::endl;
+  std::cout << "[SYSTEM] Push_Back: In Progress" << std::endl;
+  std::cout << "[SYSTEM] Adding New Element To The Back Of The List" << std::endl;
 
   Node<T>* newNode = new Node<T>(data); // Create The New Node Based On The Data Receive
 
@@ -130,6 +141,7 @@ void push_back(const T& data) {
 // If The List Is Empty, It Will Initialize The Head Pointer To Point To The New Element
 void push_front(const T& data) {
 
+  std::cout << "[SYSTEM] Push_Front: In Progress" << std::endl;
   std::cout << "[SYSTEM] Adding New Element To The Front Of The List" << std::endl;
 
   Node<T>* newNode = new Node<T>(data); // Create The New Node Based On The Data Receive
@@ -148,6 +160,8 @@ void push_front(const T& data) {
       newNode->next = head; // Set The Next Pointer Of The New Node To The Current Head
       this->head = newNode; // Update The Head Pointer To Point To The New Node
       this->size += 1; // Increment The Size
+
+      std::cout << "[SYSTEM] Push_Front Operation: Complete" << std::endl;
   }
 }
 
@@ -157,9 +171,10 @@ void push_front(const T& data) {
 // If The Position Is Invalid, It Will Print An Error Message
 void insert(const T& data, int pos) {
 
+  std::cout << "[SYSTEM] Attempting To Insert New Element" << pos << std::endl;
 
 
-  std::cout << "[SYSTEM] Inserting Element At Position: " << pos << std::endl;
+  std::cout << "[SYSTEM] Inserting Element: " << data << " At Position: " << pos << std::endl;
 }
 
 // === Remove The Last Element From The List And Return Its Value ===
@@ -168,13 +183,14 @@ void insert(const T& data, int pos) {
 // If The List Is Empty, It Will Return -1 Or An Appropriate Error Value
 void pop_front() {
 
+  std::cout << "[SYSTEM] Pop_Front: In Progress" << std::endl;
   std::cout << "[SYSTEM] Removing The First Element From The List" << std::endl;
 
   // === Guard Clause To Check If The List Is Empty ===
   // If The List Is Empty, It Will Print A Message Indicating That There Is Nothing
   if (this->head == nullptr) {
-      std::cout << "Empty List. Nothing To Delete." << std::endl;
-      return;
+      std::cout << "[ERROR] Empty List. Nothing To Delete." << std::endl;
+      return; // Return If The List Is Empty
   }
   
   // === Guard Clause To Check If The List Contains Only One Node ===
@@ -196,18 +212,21 @@ void pop_front() {
       this->head = this->head->next; // Move The Head Pointer To The Next Node
       this->head->prev = nullptr; // Set The Previous Pointer Of The New Head To Nullptr
       delete temp; // Delete The Old/Original Head Node
+
+      std::cout << "[SYSTEM] Pop_Front Operation: Complete" << std::endl;
   }
 }
 
 void pop_back() {
 
+  std::cout << "[SYSTEM] Pop_Back: In Progress" << std::endl;
   std::cout << "[SYSTEM] Removing The Last Element From The List" << std::endl;
 
   // === Guard Clause To Check If The List Is Empty ===
   // If The List Is Empty, It Will Print A Message Indicating That There Is Nothing
   if (this->tail == nullptr) {
-      std::cout << "Empty List. Nothing To Delete." << std::endl;
-      return;
+      std::cout << "[ERROR] Empty List. Nothing To Delete." << std::endl;
+      return; // Return If The List Is Empty
   }
   
   // === Guard Clause To Check If The List Contains Only One Node ===
@@ -229,6 +248,8 @@ void pop_back() {
       this->tail = this->tail->prev; // Move The Tail Pointer To The Previous Node
       this->tail->next = nullptr; // Set The Next Pointer Of The New Tail To Nullptr
       delete temp; // Delete The Old/Original Tail Node
+
+      std::cout << "[SYSTEM] Pop_Back Operation: Complete" << std::endl;
   }
 }
 
@@ -238,9 +259,11 @@ void pop_back() {
 // If The Position Is Invalid, It Will Print An Error Message
 void remove(int pos) {
 
+  std::cout << "[SYSTEM] Removing Element With Position: " << pos << std::endl;
 
+ 
 
-  std::cout << "[SYSTEM] Removing Element At Position: " << pos << std::endl;
+  std::cout << "[SYSTEM] Element Removal With Position: Successful" << std::endl;
 }
 
 // === Remove An Element With Specific Data From The List ===
@@ -249,9 +272,11 @@ void remove(int pos) {
 // If The Element Is Found, It Will Remove The Node Containing That Data
 void remove(const T& data) {
 
-
-
   std::cout << "[SYSTEM] Removing Element With Data: " << data << std::endl;
+
+ 
+
+  std::cout << "[SYSTEM] Element Removal With Data: Successful" << std::endl;
 }
 
 // === Remove An Element With Specific Data At A Specific Position From The List ===
@@ -260,11 +285,11 @@ void remove(const T& data) {
 // If The Element Is Not Found, It Will Print A Message Indicating That The Element Was Not Found
 void remove(const T& data, int pos) {
 
-
+  std::cout << "[SYSTEM] Removing Element With Data: " << data << ", At Position: " << pos << std::endl;
 
  
 
-  std::cout << "[SYSTEM] Removing Element With Data: " << data << " At Position: " << pos << std::endl;
+  std::cout << "[SYSTEM] Element Removal With Data/Position: Successful" << std::endl;
 }
 
 // === Clear The List By Removing All Elements ===
@@ -277,6 +302,7 @@ void clear() {
 
   
 
+  std::cout << "[SYSTEM] Clearing List: Successful" << std::endl;
 }
 
 // === Private Data Members ===
