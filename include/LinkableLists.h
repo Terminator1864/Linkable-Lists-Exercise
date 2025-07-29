@@ -27,6 +27,8 @@ public:
 // It Also Initializes The Previous And Next Pointers For Each Node To Maintain The Linkable Structure
 LinkableLists() {
 
+  std::cout << "[SYSTEM] LinkableLists Initializing" << std::endl;
+
   this->head = nullptr; // Initialize The Head Pointer To Null
   this->tail = nullptr; // Initialize The Tail Pointer To Null
   this->size = 0; // Initialize The Size To 0
@@ -37,6 +39,8 @@ LinkableLists() {
 // It Will Print The Data Of Each Node Until It Reaches The Tail Node.
 // It Will Also Print A Message Indicating That The Forward Display Is In Progress
 void traversal() { // Traversal Function To Display The List In Forward Order
+
+  std::cout << "[SYSTEM] Forward Display In Progress" << std::endl;
 
   Node<T>* node = this->head; // Create Pointer That Starts At The Head Of The List  
 
@@ -56,6 +60,8 @@ void traversal() { // Traversal Function To Display The List In Forward Order
 // It Will Print The Data Of Each Node In Reverse Order Until It Reaches The Head Node
 // It Will Also Print A Message Indicating That The Reversal Display Is In Progress
 void reversal() {
+
+  std::cout << "[SYSTEM] Reversal Display In Progress" << std::endl;
 
   Node<T>* node = this->tail; // Create Pointer That Starts At The Tail Of The List
 
@@ -88,6 +94,8 @@ void get(int pos) {
 // If The List Is Empty, It Will Initialize The Tail Pointer To Point To The New Element
 void push_back(const T& data) {
 
+  std::cout << "[SYSTEM] Adding New Element To The End Of The List" << std::endl;
+
   Node<T>* newNode = new Node<T>(data); // Create The New Node Based On The Data Receive
 
   // === Guard Clause To Check If The List Is Empty ===
@@ -112,6 +120,8 @@ void push_back(const T& data) {
 // It Will Also Update The Head Pointer To Point To The New First Element
 // If The List Is Empty, It Will Initialize The Head Pointer To Point To The New Element
 void push_front(const T& data) {
+
+  std::cout << "[SYSTEM] Adding New Element To The Front Of The List" << std::endl;
 
   Node<T>* newNode = new Node<T>(data); // Create The New Node Based On The Data Receive
 
@@ -143,6 +153,8 @@ void insert(const T& data, int pos) {
 // If The List Is Empty, It Will Return -1 Or An Appropriate Error Value
 void pop_front() {
 
+  std::cout << "[SYSTEM] Removing The First Element From The List" << std::endl;
+
   // === Guard Clause To Check If The List Is Empty ===
   // If The List Is Empty, It Will Print A Message Indicating That There Is Nothing
   if (this->head == nullptr) {
@@ -173,6 +185,8 @@ void pop_front() {
 }
 
 void pop_back() {
+
+  std::cout << "[SYSTEM] Removing The Last Element From The List" << std::endl;
 
   // === Guard Clause To Check If The List Is Empty ===
   // If The List Is Empty, It Will Print A Message Indicating That There Is Nothing

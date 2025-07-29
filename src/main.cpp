@@ -40,27 +40,32 @@ int main() {
   // This Instance Will Be Initialized With The Array And The Count Of Elements In The Array
   LinkableLists<char> myList2 = LinkableLists<char>();
 
-  myList1.traversal(); // Call The Traversal Function To Display The List In Forward Order
-
+  myList1.search(); // Call The Search Function To Search For An Element In The List
   myList1.reversal(); // Call The Reversal Function To Display The List In Reverse Order
 
   myList1.push_back(15); // Add A New Element (15) To The End Of The List
-  
+  myList1.traversal(); // Call The Traversal Function To Display The List In Forward Order
+
   myList1.push_front(50); // Add A New Element (50) To The Front Of The List
-  
+  myList1.traversal(); // Call The Traversal Function To Display The List In Forward Order
+
   myList1.pop_front(); // Remove The Last Element From The List
-  
-  myList1.pop_back(); 
+  myList1.traversal(); // Call The Traversal Function To Display The List In Forward Order
 
-  myList1.insert(10, 5); 
+  myList1.pop_back(); // Remove The Last Element From The List
+  myList1.traversal(); // Call The Traversal Function To Display The List In Forward Order
 
-  myList1.search(); 
+  myList1.insert(10, 5); // Insert A New Element (10) At Position 5
+  myList1.traversal(); // Call The Traversal Function To Display The List In Forward Order
 
-  myList1.get(2); 
+  myList1.get(2); // Get The Element At Position 2
+  myList1.traversal(); // Call The Traversal Function To Display The List In Forward Order
 
-  myList1.remove(1, 1);
+  myList1.remove(1, 1); // Remove The Element At Position 1
+  myList1.traversal(); // Call The Traversal Function To Display The List In Forward Order
 
-  myList1.clear(); 
+  myList1.clear(); // Clear The List By Removing All Elements
+  myList1.traversal(); // Call The Traversal Function To Display The List In Forward Order
 
   return 0; // Return 0 To Indicate Successful Execution Of The Program
 }
