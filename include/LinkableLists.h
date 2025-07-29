@@ -27,28 +27,27 @@ public:
 // It Also Initializes The Previous And Next Pointers For Each Node To Maintain The Linkable Structure
 LinkableLists() {
 
-  this->head = nullptr; 
-  this->tail = nullptr; 
-  this->size = 0; 
+  this->head = nullptr; // Initialize The Head Pointer To Null
+  this->tail = nullptr; // Initialize The Tail Pointer To Null
+  this->size = 0; // Initialize The Size To 0
 }
 
 // === Traversal Function To Display The List In Forward Order ===
 // This Function Will Display The List In Forward Order By Traversing From The Head To The Tail
 // It Will Print The Data Of Each Node Until It Reaches The Tail Node.
 // It Will Also Print A Message Indicating That The Forward Display Is In Progress
-
 void traversal() { // Traversal Function To Display The List In Forward Order
 
-  // Create a pointer that starts at the head of the list, which we will move through the list
-  Node<T>* node = this->head;   
+  Node<T>* node = this->head; // Create Pointer That Starts At The Head Of The List  
 
-  // enter into a while loop that continues until the end of the list
+  // === While Loop To Traverse The List ===
+  // This Loop Will Continue Until The Node Pointer Reaches The End Of The List (nullptr)
+  // It Will Print The Data Of Each Node In The List
   while (node != nullptr) {
+
     // print the data of the current node
     std::cout << "Current Data: " << node->data << std::endl; 
-
-    // move the node pointer to the next node (the node that comes after itself)
-    node = node->next;
+    node = node->next; // Move The Node Pointer To The Next Node In The List
   }
 }
 
@@ -58,16 +57,14 @@ void traversal() { // Traversal Function To Display The List In Forward Order
 // It Will Also Print A Message Indicating That The Reversal Display Is In Progress
 void reversal() {
 
-  // Create a pointer that starts at the head of the list, which we will move through the list
-  Node<T>* node = this->tail;   
+  Node<T>* node = this->tail; // Create Pointer That Starts At The Tail Of The List
 
-  // enter into a while loop that continues until the end of the list
+  // === While Loop To Traverse The List In Reverse ===
+  // This Loop Will Continue Until The Node Pointer Reaches The Beginning Of The List (nullptr)
   while (node != nullptr) {
-    // print the data of the current node
+   
     std::cout << "Current Data: " << node->data << std::endl; 
-
-    // move the node pointer to the next node (the node that comes after itself)
-    node = node->prev;
+    node = node->prev; // Move The Node Pointer To The Previous Node In The List
   }
 }
 
@@ -91,19 +88,22 @@ void get(int pos) {
 // If The List Is Empty, It Will Initialize The Tail Pointer To Point To The New Element
 void push_back(const T& data) {
 
-  // Create the new node based on the data received
-  Node<T>* newNode = new Node<T>(data);
+  Node<T>* newNode = new Node<T>(data); // Create The New Node Based On The Data Receive
 
-  // if the list is empty, set the head and tail to the new node
+  // === Guard Clause To Check If The List Is Empty ===
+  // If The List Is Empty, It Will Initialize The Head And Tail Pointers To Point To The New Node
+  // It Will Also Set The Size To 1, Indicating That There Is One Element
   if (this->tail == nullptr) {
-      this->tail = newNode;
-      this->head = newNode;
-      this->size += 1;
-  } else {
-      this->tail->next = newNode;
-      newNode->prev = tail;
-      this->tail = newNode;
-      this->size += 1;
+      this->tail = newNode; // Set The Tail Pointer To The New Node
+      this->head = newNode; // Set The Head Pointer To The New Node
+      this->size += 1; // Initialize The Size To 1
+  } 
+  
+  else { // If The List Is Not Empty, Add The New Node To The End Of The List
+      this->tail->next = newNode; // Set The Next Pointer Of The Current Tail To The New Node
+      newNode->prev = tail; // Set The Previous Pointer Of The New Node To The Current Tail
+      this->tail = newNode; // Update The Tail Pointer To Point To The New Node
+      this->size += 1; // Increment The Size
   }
 }
 
@@ -113,19 +113,22 @@ void push_back(const T& data) {
 // If The List Is Empty, It Will Initialize The Head Pointer To Point To The New Element
 void push_front(const T& data) {
 
-  // Create the new node based on the data received
-  Node<T>* newNode = new Node<T>(data);
+  Node<T>* newNode = new Node<T>(data); // Create The New Node Based On The Data Receive
 
-  // if the list is empty, set the head and tail to the new node
+  // === Guard Clause To Check If The List Is Empty ===
+  // If The List Is Empty, It Will Initialize The Head And Tail Pointers To Point To The New Node
+  // It Will Also Set The Size To 1, Indicating That There Is One Element
   if (this->head == nullptr) {
-      this->head = newNode;
-      this->tail = newNode;
-      this->size += 1;
-  } else {
-      this->head->prev = newNode;
-      newNode->next = head;
-      this->head = newNode;
-      this->size += 1;
+      this->head = newNode; // Set The Head Pointer To The New Node
+      this->tail = newNode; // Set The Tail Pointer To The New Node
+      this->size += 1; // Initialize The Size To 1
+  } 
+  
+  else { // If The List Is Not Empty, Add The New Node To The Front Of The List
+      this->head->prev = newNode; // Set The Previous Pointer Of The Current Head To The New Node
+      newNode->next = head; // Set The Next Pointer Of The New Node To The Current Head
+      this->head = newNode; // Update The Head Pointer To Point To The New Node
+      this->size += 1; // Increment The Size
   }
 }
 
@@ -140,47 +143,63 @@ void insert(const T& data, int pos) {
 // If The List Is Empty, It Will Return -1 Or An Appropriate Error Value
 void pop_front() {
 
-  // if the list is empty, do nothing
+  // === Guard Clause To Check If The List Is Empty ===
+  // If The List Is Empty, It Will Print A Message Indicating That There Is Nothing
   if (this->head == nullptr) {
       std::cout << "Empty List. Nothing To Delete." << std::endl;
       return;
   }
   
-  // if the list contains only one node, delete that one node
-  if (this->head == this->tail) { // or this->size == 1
-      // clear(); // delete the head and tail
-      delete this->head; // or this->tail
-      this->head = nullptr;
-      this->tail = nullptr;
-  } else {
-      // if the list contains more than one node, delete the head node
-      Node<T>* temp = this->head; // store the head node in a temporary variable
-      this->head = this->head->next; // move the head pointer to the next node
-      this->head->prev = nullptr; // set the previous pointer of the new head to nullptr
-      delete temp; // delete the old/original head node
+  // === Guard Clause To Check If The List Contains Only One Node ===
+  // If The List Contains Only One Node, It Will Delete That One Node
+  if (this->head == this->tail) { // Or this->size == 1
+      
+      // === Clear The List By Deleting The Head And Tail ===
+      // This Will Delete The Head Node And Set The Head And Tail Pointers To Null
+      delete this->head; // Delete The Head Node
+      this->head = nullptr; // Set The Head Pointer To Null
+      this->tail = nullptr; // Set The Tail Pointer To Null
+  } 
+  
+  else { // If The List Contains More Than One Node, Remove The Head Node
+      
+      // === Remove The Head Node And Update The Head Pointer ===
+      // This Will Delete The Head Node And Move The Head Pointer To The Next Node
+      Node<T>* temp = this->head; // Store The Head Node In A Temporary Variable
+      this->head = this->head->next; // Move The Head Pointer To The Next Node
+      this->head->prev = nullptr; // Set The Previous Pointer Of The New Head To Nullptr
+      delete temp; // Delete The Old/Original Head Node
   }
 }
 
 void pop_back() {
 
-  // if the list is empty, do nothing
+  // === Guard Clause To Check If The List Is Empty ===
+  // If The List Is Empty, It Will Print A Message Indicating That There Is Nothing
   if (this->tail == nullptr) {
       std::cout << "Empty List. Nothing To Delete." << std::endl;
       return;
   }
   
-  // if the list contains only one node, delete that one node
-  if (this->tail == this->head) { // or this->size == 1
-      // clear(); // delete the head and tail
-      delete this->head; // or this->head
-      this->head = nullptr;
-      this->tail = nullptr;
-  } else {
-      // if the list contains more than one node, delete the head node
-      Node<T>* temp = this->tail; // store the head node in a temporary variable
-      this->tail = this->tail->prev; // move the head pointer to the next node
-      this->tail->next = nullptr; // set the previous pointer of the new head to nullptr
-      delete temp; // delete the old/original head node
+  // === Guard Clause To Check If The List Contains Only One Node ===
+  // If The List Contains Only One Node, It Will Delete That One Node
+  if (this->tail == this->head) { // Or this->size == 1
+
+      // === Clear The List By Deleting The Head And Tail ===
+      // This Will Delete The Tail Node And Set The Head And Tail Pointers To Null
+      delete this->head; // Delete The Tail Node
+      this->head = nullptr; // Set The Head Pointer To Null
+      this->tail = nullptr; // Set The Tail Pointer To Null
+  } 
+  
+  else { // If The List Contains More Than One Node, Remove The Tail Node
+
+      // === Remove The Tail Node And Update The Tail Pointer ===
+      // This Will Delete The Tail Node And Move The Tail Pointer To The Previous Node
+      Node<T>* temp = this->tail; // Store The Tail Node In A Temporary Variable
+      this->tail = this->tail->prev; // Move The Tail Pointer To The Previous Node
+      this->tail->next = nullptr; // Set The Next Pointer Of The New Tail To Nullptr
+      delete temp; // Delete The Old/Original Tail Node
   }
 }
 
