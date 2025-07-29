@@ -51,7 +51,7 @@ void traversal() { // Traversal Function To Display The List In Forward Order
   while (node != nullptr) {
 
     // print the data of the current node
-    std::cout << "Current Data(Traversal): " << node->data << std::endl; 
+    std::cout << "[INFO] Current Data(Traversal): " << node->data << std::endl; 
     node = node->next; // Move The Node Pointer To The Next Node In The List
   }
 
@@ -72,7 +72,7 @@ void reversal() {
   // This Loop Will Continue Until The Node Pointer Reaches The Beginning Of The List (nullptr)
   while (node != nullptr) {
    
-    std::cout << "Current Data(Reversal): " << node->data << std::endl; 
+    std::cout << "[INFO] Current Data(Reversal): " << node->data << std::endl; 
     node = node->prev; // Move The Node Pointer To The Previous Node In The List
   }
 
