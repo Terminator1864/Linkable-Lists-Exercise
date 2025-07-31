@@ -147,10 +147,6 @@ void search(const T& inputData) {
 // If The Position Is Invalid, It Will Print An Error Message
 void get(int pos) {
 
-  int counter = 0; // Only Within This Scope Of This Get Function: Counter Comes Into Existence And Belongs Within,
-  // This Get Function, And Same IS True For ANY Variable Declaration(s) With Any Function. This Counter LIVES AND DIES,
-  // Within Each Exclusive Function Call(s)
-
   std::cout << "[SYSTEM] Getting Element At Position: " << pos << std::endl;
 
   // === Guard Clause To Check If The Position Is Valid ===
@@ -182,17 +178,19 @@ void get(int pos) {
     ++index; // Increase The Index Counter By One After Cycling Through Each Node
   }
 
-  // === Guard Clause To Check If The Node Is Null ===
+  // === Paranoid Guard Clause To Check If The Node Is Null ===
   // If The Node Is Null, It Means The Position Is Out Of Range
   if (node == nullptr) {
-    std::cout << "[ERROR] Unexpected Null Node" << std::endl;
+    std::cout << "[ERROR] Random Null Node..." << std::endl;
+    std::cout << "[IMMEDIATE ATTENTION] Needing Manual Debugging/Maintenance " << std::endl; 
+    std::cout << "[ATTENTION] System Is In Unusable State: Cannot Function" << std::endl; 
+    std::cout << "[ATTENTION] Please Refer To Documentation: Troubleshooting" << std::endl; 
     return; // Exit The Function If The Node Is Null
   }
 
   std::cout << "[INFO] User Found Data: " << node->data << ", At Position: " << pos << std::endl;
   std::cout << "[SYSTEM] Get Operation: Complete" << std::endl;
 }
-
 
 // === Add A New Element To The End Of The List And Return Its Value ===
 // This Function Will Add A New Element To The End Of The List And Return Its Value
