@@ -69,11 +69,10 @@ void traversal() { // Traversal Function To Display The List In Forward Order
   Node<T>* node = this->head; // Create Pointer That Starts At The Head Of The List  
 
   // === While Loop To Traverse The List ===
-  // This Loop Will Continue Until The Node Pointer Reaches The End Of The List (nullptr)
+  // This Loop Will Continue Until The Node Pointer Reaches The End Of The List (Nullptr)
   // It Will Print The Data Of Each Node In The List
   while (node != nullptr) {
-
-    // print the data of the current node
+    
     std::cout << "[INFO] Current Data(Traversal): " << node->data << std::endl; 
     node = node->next; // Move The Node Pointer To The Next Node In The List
   }
@@ -130,8 +129,8 @@ void search(const T& inputData) {
     // === Guard Clause: Check If The Current Node Contains The Input Data ===
     // If The Current Node Contains The Input Data, It Will Print A Message Indicating That The Data Was Found
     if (node->data == inputData) {
-      std::cout << "[INFO] User Found Data: " << inputData << std::endl;
-      break; // Exit Function When Found Data 
+      std::cout << "[INFO] Search: Successfully Found Data: " << inputData << std::endl;
+      break; // Exit Function When Found Data
     }
 
     node = node->next; // Move The Node Pointer To The Next Node In The List
@@ -152,7 +151,9 @@ void get(int pos) {
   // === Guard Clause To Check If The Position Is Valid ===
   // If The Position Is Invalid, It Will Print An Error Message
   if (pos < 0 || pos >= this->size) {
-    std::cout << "[ERROR] Invalid Position — Out Of Range" << std::endl;
+    std::cout << "[ERROR] Invalid Position: Out Of Range" << std::endl;
+    std::cout << "[ERROR] Please Enter A Valid Position...." << std::endl;
+    std::cout << "[ACTION] INPUT A Position Between (0-" << this->size - 1 << ")" << std::endl;
     return; // Exit The Function If The Position Is Invalid
   }
 
@@ -181,10 +182,8 @@ void get(int pos) {
   // === Paranoid Guard Clause To Check If The Node Is Null ===
   // If The Node Is Null, It Means The Position Is Out Of Range
   if (node == nullptr) {
-    std::cout << "[ERROR] Random Null Node..." << std::endl;
+    std::cout << "[ERROR] A Random Null Node Detection..." << std::endl;
     std::cout << "[IMMEDIATE ATTENTION] Needing Manual Debugging/Maintenance " << std::endl; 
-    std::cout << "[ATTENTION] System Is In Unusable State: Cannot Function" << std::endl; 
-    std::cout << "[ATTENTION] Please Refer To Documentation: Troubleshooting" << std::endl; 
     return; // Exit The Function If The Node Is Null
   }
 
@@ -251,7 +250,7 @@ void push_front(const T& data) {
 }
 
 // === Insert An Element At A Specific Position In The List ===
-// It Will Traverse The List Until It Reaches The Specified Position
+// It Will Traverse The List Until It Reaches The Specific Position
 // If The Position Is Valid, It Will Insert The New Node At That Position
 // If The Position Is Invalid, It Will Print An Error Message
 void insert(const T& inputData, int pos) {
@@ -261,7 +260,9 @@ void insert(const T& inputData, int pos) {
   // === Guard Clause To Check If The Position Is Valid ===
   // If The Position Is Invalid, It Will Print An Error Message
   if (pos < 0 || pos > this->size) {
-      std::cout << "[ERROR] Invalid Position. Insertion Failure" << std::endl;
+      std::cout << "[ERROR] Invalid Position: Out Of Range" << std::endl;
+      std::cout << "[ERROR] Please Enter A Valid Position...." << std::endl;
+      std::cout << "[ACTION] INPUT A Position Between (0-" << this->size - 1 << ")" << std::endl;
       return; // Return If The Position Is Invalid
   }
 
@@ -286,8 +287,8 @@ void insert(const T& inputData, int pos) {
 
   int currentIndex = 0; // Initialize Current Index Counter To 0
 
-  // === While Loop To Traverse The List Until The Specified Position ===
-  // This Loop Will Continue Until The Node Pointer Reaches The Specified Position
+  // === While Loop To Traverse The List Until The Specific Position ===
+  // This Loop Will Continue Until The Node Pointer Reaches The Specific Position
   // It Will Also Check If The Current Index Is Less Than The Position To Insert
   while (current != nullptr && currentIndex < pos) {
       current = current->next; // Move The Node Pointer To The Next Node In The List
