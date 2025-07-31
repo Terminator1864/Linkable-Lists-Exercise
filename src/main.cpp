@@ -21,19 +21,17 @@ int main() {
   
     // === Create An Array And Initialize The LinkableLists Class ===
     // This Array Contains The Initial Elements To Populate The Linkable List
-    int listArray1[] = {0, 1, 2, 3, 4}; // Initialize An Array With 5 Elements
+    int listArray1[] = {4, 8, 12, 16, 20}; // Initialize An Array With 5 Elements8
     // Note: The Array Contains 5 Elements, Which Will Be In Use To Initialize The Linkable List
-    int countElementsArray1 = 0; // Count Of Elements In The Array
     // Note: The Count Of Elements In The Array Is Set To 0 Initially, But It Will Receive Updates Later
-    countElementsArray1 = 5; // Update The Count Of Elements In The Array To 5, As There Are 5 Elements In The Array
+    int countElementsArray1 = 5; // Update The Count Of Elements In The Array To 5, As There Are 5 Elements In The Array
 
     // === Create An Array And Initialize The LinkableLists Class ===
     // This Array Contains The Initial Elements To Populate The Linkable List
     char listArray2[] = {'A', 'B', 'C', 'D', 'E'}; // Initialize An Array With 5 Elements
     // Note: The Array Contains 5 Elements, Which Will Be In Use To Initialize The Linkable List
-    int countElementsArray2 = 0; // Count Of Elements In The Array
     // Note: The Count Of Elements In The Array Is Set To 0 Initially, But It Will Receive Updates Later
-    countElementsArray2 = 5; // Update The Count Of Elements In The Array To 5, As There Are 5 Elements In The Array
+    int countElementsArray2 = 5; // Update The Count Of Elements In The Array To 5, As There Are 5 Elements In The Array
 
     std::cout << "========================================================================" << std::endl; 
     std::cout << "JRI (Johnston's Robotics Industries) Experimental Linkable-List Program)" << std::endl; 
@@ -45,12 +43,17 @@ int main() {
     std::cout << "[ACTION] Please Stand By: WAIT - LOADING User Interface..." << std::endl;
 
     // === Create An Instance Of The LinkableLists Class ===
-    // This Instance Will Be Initialized With The Array And The Count Of Elements In The Array
-    LinkableLists<int> myList1 = LinkableLists<int>();
+    // This Instance Will Have A Linkable List, With The Array And The Count Of Elements In The Array
+    // We Are Using The LinkableLists Class To Create A Linkable List, Passing The Array And The Count Of Elements
+    // This Will Initialize The Linkable List With The Elements From The Array
+    LinkableLists<int> myList1(listArray1, countElementsArray1); 
+    // Passing The Array And The Count Of Elements To Initialize The Linkable List
 
     // === Create An Instance Of The LinkableLists Class ===
-    // This Instance Will Be Initialized With The Array And The Count Of Elements In The Array
-    LinkableLists<char> myList2 = LinkableLists<char>();
+    // This Instance Will Have A Linkable List, With The Array And The Count Of Elements In The Array
+    // We Are Using The LinkableLists Class To Create A Linkable List, Passing The Array And The Count Of Elements
+    // This Will Initialize The Linkable List With The Elements From The Array
+    LinkableLists<char> myList2(listArray2, countElementsArray2);
 
     bool quit = false; // This Variable Controls The Main Loop Of The Application, Allowing The User To Exit The Program Gracefully.
       // This Loop Continues Until The User Chooses To Quit By Entering '0'.
@@ -62,7 +65,8 @@ int main() {
 
       std::cout << "================== JRI Linkable List Program ==================" << std::endl; 
       std::cout << "===============================================================" << std::endl; 
-      std::cout << "[SYSTEM] Please Select From Any Of The Following Options Below" << std::endl; 
+      std::cout << "[SYSTEM] Please Select From Any Of The Following Options Below" << std::endl;
+      std::cout << "[INFO] Option 0 - Quit Program: Terminate All Operations" << std::endl;  
       std::cout << "[INFO] Option 1 - Search: Meaning To Look For Element In List" << std::endl; 
       std::cout << "[INFO] Option 2 - Traversal: Move Forward Through The List" << std::endl; 
       std::cout << "[INFO] Option 3 - Reversal: Move In Reverse Through The List" << std::endl; 
@@ -76,105 +80,134 @@ int main() {
       std::cout << "[INFO] Option 11 - Clear List: Eliminate All Elements In List" << std::endl; 
       std::cout << "===============================================================" << std::endl; 
 
-      
-      int userInput = 0; // Variable To Store User Input For Program Continuation
-      std::cin >> userInput; // Wait For User Input To Proceed With The Program
+      int userChoice; // Variable To Store User Input For Menu Selection
+      std::cin >> userChoice; // Wait For User Input To Proceed With The Program
 
       // === Guard Clause To Check If User Input Is Valid ===
       // If The User Input Is Not A Valid Number, It Will Print An Error Message
       // If The User Input Is Less Than Or Equal To 0 Or Greater Than 10
-      if (userInput <= 0 || userInput > 10) {                            
-        
-        std::cout << "[ATTENTION] Invalid Input: Try Again" << std::endl;
-        std::cout << "[ERROR] Please Enter A Number...." << std::endl;
-        std::cout << "[ACTION] User: INPUT Number Between (1-10)" << std::endl;
-        continue; // Continue To The Next Iteration Of The Loop If The Input Is Invalid
+      if (!(std::cin >> userChoice) || userChoice < 0 || userChoice > 11) { // Check If The Input Is Not A Valid Number
+          std::cin.clear();
+          std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+          std::cout << "[ATTENTION] Invalid Input: Try Again" << std::endl;
+          std::cout << "[ERROR] Please Enter A Number...." << std::endl;
+          std::cout << "[ACTION] User: INPUT Number Between (1-11)" << std::endl;
+          continue;
       }
-    
-      // === Switch Case To Handle User Input ===
-      // This Switch Case Will Execute Different Actions Based On The User's Choice
-      // It Will Call The Appropriate Function From The LinkableLists Class Based On The User's Input
-      // Each Case Corresponds To A Different Option In The Menu Displayed Above
-      switch(userInput) {
 
-        case 1: { // Search
-
+        if (userChoice == 1) { // Search
+          int inputData; // Search Function Should Receive User Input To Search Linkable List myList1  
           std::cout << "[SYSTEM] User Made Selection For Search...." << std::endl;
-          myList1.search(); // Call The Search Function To Search For An Element In The List
-          break; // End Of Case 1: Search
+          std::cin >> inputData; 
+          myList1.search(inputData); // Call The Search Function To Search For An Element In The List
+          continue; // End Of Case 1: Search
         }
 
-        case 2: { // Traversal
+        if (userChoice == 2) { // Traversal
           std::cout << "[SYSTEM] User Made Selection For Traversal...." << std::endl;
           myList1.traversal(); // Call The Traversal Function To Display The List In Forward Order
-          break; // End Of Case 2: Traversal
+          continue; // End Of Case 2: Traversal
         }
 
-        case 3: { // Traversal
+        if (userChoice == 3) { // Reversal
           std::cout << "[SYSTEM] User Made Selection For Reversal...." << std::endl;
           myList1.reversal(); // Call The Reversal Function To Display The List In Reverse Order
-          break; // End Of Case 3: Traversal
+          continue; // End Of Case 3: Reversal
         }
 
-        case 4: { // Reversal
+        if (userChoice == 4) { // Push_Front
           std::cout << "[SYSTEM] User Made Selection For Push_Front...." << std::endl;
           myList1.push_front(50); // Add A New Element (50) To The Front Of The List
-          break; // End Of Case 4: Reversal
+          continue; // End Of Case 4: Push_Front
         }
 
-        case 5: { // Push_Front
+        if (userChoice == 5) { // Push_Back
           std::cout << "[SYSTEM] User Made Selection For Push_Back...." << std::endl;
           myList1.push_back(15); // Add A New Element (15) To The End Of The List
-          break; // End Of Case 5: Push_Front
+          continue; // End Of Case 5: Push_Back
         }
 
-        case 6: { // Push_Back
+        if (userChoice == 6) { // Pop_Front
           std::cout << "[SYSTEM] User Made Selection For Pop_Front...." << std::endl;
           myList1.pop_front(); // Remove The First Element From The List
-          break; // End Of Case 6: Push_Back
+          continue; // End Of Case 6: Pop_Front
         }
 
-        case 7: { // Pop_Front
+        if (userChoice == 7) { // Pop_Back
           std::cout << "[SYSTEM] User Made Selection For Pop_Back...." << std::endl;
           myList1.pop_back(); // Remove The Last Element From The List
-          break; // End Of Case 7: Pop_Front
+          continue; // End Of Case 7: Pop_Back
 
         }
 
-        case 8: { // Pop_Back        
+        if (userChoice == 8) { // Insert
+          int inputData; // Insert Function Should Receive User Input To Insert Into Linkable List myList1
+          int pos; // Variable To Store User Input For Position To Insert At
+
           std::cout << "[SYSTEM] User Made Selection For Insert...." << std::endl;
-          myList1.insert(1, 25); // Insert A New Element (25) At Position 1
-          break;
+          std::cout << "[ACTION] Enter The Position To Insert At: ";
+          std::cin >> pos; // Get User Input For The Position To Insert At
+
+          std::cout << "[ACTION] Enter The Value To Insert: ";
+          std::cin >> inputData; // Get User Input For The Value To Insert
+
+          // Call The Insert Function To Insert A New Element At The Specific Position
+          myList1.insert(inputData, pos); // Insert The User Input At Position 'pos'
+          continue;
         }
 
-        case 9: {
+        if (userChoice == 9) { // Get
+          int inputData; // Get Function Should Receive User Input To Get Data From Linkable List myList1
+          int pos; // Variable To Store User Input For Position To Get At
+
           std::cout << "[SYSTEM] User Made Selection For Get...." << std::endl;
-          myList1.get(2); // Get The Element At Position 2
-          break;
+
+          std::cout << "[ACTION] Enter The Position To Get: ";
+          std::cin >> pos; // Get User Input For The Position To Get
+
+          myList1.get(pos); // Get The Element At Position 'pos'
+          continue;
         }
 
-        case 10: {
+        if (userChoice == 10) { // Removal
 
           std::cout << "[SYSTEM] User Made Selection For Remove...." << std::endl;
 
-          myList1.remove(1, 1); // Remove A Element (1) At Position 1
-          break;
+          int inputData; // Remove Function Should Receive User Input To Remove From Linkable List myList1
+          int pos; // Variable To Store User Input For Position To Remove At
+
+          std::cout << "[ACTION] Enter The Position To Remove At: ";
+          std::cin >> pos; // Get User Input For The Position To Remove At
+
+          std::cout << "[ACTION] Enter The Value To Remove: ";
+          std::cin >> inputData; // Get User Input For The Value To Remove
+
+          myList1.remove(1, inputData, pos); // Remove The Element With The Given Data From The List
+          // Note: This Will Remove The First Occurrence Of The Element With The Given Data
+
+          continue;
         }
 
-        case 11: {
+        if (userChoice == 11) { // Clear List
 
           std::cout << "[SYSTEM] User Made Selection For Clear...." << std::endl;
 
           myList1.clear(); // Clear The List By Removing All Elements
-          break;
+          continue;
         }
 
-        default: {
+        else if (userChoice == 0) { // Quit
 
-          std::cout << "[SYSTEM] Waiting For User Inputs: From (1-10)" << std::endl;
+          std::cout << "[SYSTEM] User Made Selection For Quit...." << std::endl;
+          break; // Exit The Loop If The User Chooses To Quit
+        }
+
+        else { // Wait For User Input
+
+          std::cout << "[SYSTEM] Waiting For User Inputs: From (1-11)" << std::endl;
           std::cout << "[ACTION] User: Please Make An Input To Console" << std::endl;
+          continue; // Continue The Loop If The User Input Is Not Valid
         }
-      } // End Of Switch Case 
     } // End Of While Loop
 
     return 0; // Return 0 To Indicate Successful Execution Of The Program

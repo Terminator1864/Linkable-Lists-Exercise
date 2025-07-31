@@ -24,7 +24,7 @@ public:
 // It Initializes The Linkable List By Creating Nodes For Each Element In The Array
 // It Sets The Head Node To Point To The First Element And The Tail Node To Point To The Last Element
 // It Also Initializes The Previous And Next Pointers For Each Node To Maintain The Linkable Structure
-LinkableLists() {
+LinkableLists(T myListArray[], int count) { // Takes IN 
 
   std::cout << "[SYSTEM] LinkableLists Initializing" << std::endl;
 
@@ -32,7 +32,27 @@ LinkableLists() {
   this->tail = nullptr; // Initialize The Tail Pointer To Null
   this->size = 0; // Initialize The Size To 0
 
+  for (int i = 0; i < count; i++) {
+      push_back(myListArray[i]); // Use your existing push_back logic
+  }
+
   std::cout << "[SYSTEM] LinkableLists Initialization: Successful" << std::endl;
+}
+
+// === Constructor To Initialize The Linkable List With An Array ===
+// This Constructor Takes An Array And The Count Of Elements In The Array As Arguments
+// It Initializes The Linkable List By Creating Nodes For Each Element In The Array
+// It Sets The Head Node To Point To The First Element And The Tail Node To Point To The Last Element
+// It Also Initializes The Previous And Next Pointers For Each Node To Maintain The Linkable Structure
+LinkableLists() {
+
+  std::cout << "[SYSTEM] Empty LinkableLists Initializing" << std::endl;
+
+  this->head = nullptr; // Initialize The Head Pointer To Null
+  this->tail = nullptr; // Initialize The Tail Pointer To Null
+  this->size = 0; // Initialize The Size To 0
+
+  std::cout << "[SYSTEM] Empty LinkableLists Initialization: Successful" << std::endl;
 }
 
 // === Traversal Function To Display The List In Forward Order ===
@@ -83,11 +103,35 @@ void reversal() {
 // It Will Traverse The List And Check Each Node's Data Against The Search Criteria
 // If The Element Is Found, It Will Print A Message Indicating The Element's Position
 // If The Element Is Not Found, It Will Print A Message Indicating That The Element Was Not Found
-void search() {
+void search(const T& inputData) {
 
   std::cout << "[SYSTEM] Searching For An Element In The List" << std::endl;
 
+  if (head == nullptr) {
+      std::cout << "[WARNING] List Is Empty — Nothing To Search" << std::endl;
+      return;
+  }
 
+  Node<T>* node = this->head; // Create Pointer That Starts At The Head Of The List  
+  int index = 0; // Initialize Index Counter To 0, This Will Keep Track Of The Current Node's Position In The List
+
+  // === While Loop To Traverse The List ===
+  // This Loop Will Continue Until The Node Pointer Reaches The End Of The List (nullptr)
+  // It Will Print The Data Of Each Node In The List
+  while (node != nullptr) {
+
+    std::cout << "[INFO] Searching Node Data: " << node->data << " At Index: " << index << std::endl;
+
+    // === Guard Clause: Check If The Current Node Contains The Input Data ===
+    // If The Current Node Contains The Input Data, It Will Print A Message Indicating That The Data Was Found
+    if (node->data == inputData) {
+      std::cout << "[INFO] User Found Data: " << inputData << std::endl;
+      break; // Exit Function When Found Data 
+    }
+
+    node = node->next; // Move The Node Pointer To The Next Node In The List
+    ++index; // Increase The Index Counter By One After Cycling Through Each Node
+  }
 
   std::cout << "[SYSTEM] Search Operation: Complete" << std::endl;
 }
@@ -99,10 +143,49 @@ void search() {
 // If The Position Is Invalid, It Will Print An Error Message
 void get(int pos) {
 
+  int counter = 0; // Only Within This Scope Of This Get Function: Counter Comes Into Existence And Belongs Within,
+  // This Get Function, And Same IS True For ANY Variable Declaration(s) With Any Function. This Counter LIVES AND DIES,
+  // Within Each Exclusive Function Call(s)
+
   std::cout << "[SYSTEM] Getting Element At Position: " << pos << std::endl;
 
+  // === Guard Clause To Check If The Position Is Valid ===
+  // If The Position Is Invalid, It Will Print An Error Message
+  if (pos < 0 || pos >= this->size) {
+    std::cout << "[ERROR] Invalid Position — Out Of Range" << std::endl;
+    return; // Exit The Function If The Position Is Invalid
+  }
 
+  // === Guard Clause To Check If The List Is Empty ===
+  // If The List Is Empty, It Will Print A Message Indicating That There Is Nothing To Get
+  if (head == nullptr) {                      
+    std::cout << "[ERROR] List Is Empty" << std::endl;
+    return; // Exit The Function If The List Is Empty
+  }
 
+  // Only Within This Scope Of This Get Function: Counter Comes Into Existence And Belongs Within,
+  // This Get Function, And Same IS True For ANY Variable Declaration(s) With Any Function. This Counter LIVES AND DIES,
+  // Within Each Exclusive Function Call(s)
+  Node<T>* node = this->head; // Create Pointer That Starts At The Head Of The List
+  int index = 0; // Initialize Counter To 0
+
+  // === While Loop To Traverse The List ===
+  // This Loop Will Continue Until The Node Pointer Reaches The End Of The List (nullptr)
+  // It Will Also Check If The Current Index Is Less Than The Position To Get
+  while (node != nullptr && index < pos) {
+    node = node->next; // Move The Node Pointer To The Next Node In The List
+    // Only Within This Scope Of This Get Function: Counter Comes Into Existence And Belongs
+    ++index; // Increase The Index Counter By One After Cycling Through Each Node
+  }
+
+  // === Guard Clause To Check If The Node Is Null ===
+  // If The Node Is Null, It Means The Position Is Out Of Range
+  if (node == nullptr) {
+    std::cout << "[ERROR] Unexpected Null Node" << std::endl;
+    return; // Exit The Function If The Node Is Null
+  }
+
+  std::cout << "[INFO] User Found Data: " << node->data << ", At Position: " << pos << std::endl;
   std::cout << "[SYSTEM] Get Operation: Complete" << std::endl;
 }
 
@@ -169,13 +252,48 @@ void push_front(const T& data) {
 // It Will Traverse The List Until It Reaches The Specified Position
 // If The Position Is Valid, It Will Insert The New Node At That Position
 // If The Position Is Invalid, It Will Print An Error Message
-void insert(const T& data, int pos) {
+void insert(const T& inputData, int pos) {
 
-  std::cout << "[SYSTEM] Attempting To Insert New Element" << pos << std::endl;
+  std::cout << "[SYSTEM] Attempting To Insert New Element At Position: " << pos << std::endl;
 
-  
+  if (pos < 0 || pos > this->size) {
+      std::cout << "[ERROR] Invalid Position. Insertion Failure" << std::endl;
+      return; // Return If The Position Is Invalid
+  }
 
-  std::cout << "[SYSTEM] Inserting Element: " << data << " At Position: " << pos << std::endl;
+  Node<T>* newNode = new Node<T>(inputData); // Create The New Node Based On The Data Receive
+
+  std::cout << "[SYSTEM] Inserting Element: " << inputData << " At Position: " << pos << std::endl;
+
+  if (pos == 0) {
+      push_front(inputData);
+      return;
+  }
+  if (pos == this->size) {
+      push_back(inputData);
+      return;
+  }
+
+  Node<T>* current = this->head;
+  int currentIndex = 0;
+  while (current != nullptr && currentIndex < pos) {
+      current = current->next;
+      currentIndex++;
+  }
+
+  if (current == nullptr) {
+      std::cout << "[ERROR] Position Out Of Bounds During Insertion" << std::endl;
+      delete newNode;
+      return;
+  }
+
+  newNode->prev = current->prev;
+  newNode->next = current;
+  if (current->prev) current->prev->next = newNode;
+  current->prev = newNode;
+  this->size += 1;
+
+  std::cout << "[SYSTEM] Insert Operation: Complete" << std::endl;
 }
 
 // === Remove The Last Element From The List And Return Its Value ===
@@ -203,6 +321,8 @@ void pop_front() {
       delete this->head; // Delete The Head Node
       this->head = nullptr; // Set The Head Pointer To Null
       this->tail = nullptr; // Set The Tail Pointer To Null
+      --size; // Decrement The Size Since We Removed The Only Node
+      return;
   } 
   
   else { // If The List Contains More Than One Node, Remove The Head Node
@@ -239,6 +359,8 @@ void pop_back() {
       delete this->head; // Delete The Tail Node
       this->head = nullptr; // Set The Head Pointer To Null
       this->tail = nullptr; // Set The Tail Pointer To Null
+      --size; // Decrement The Size Since We Removed The Only Node
+      return; // Return If The List Contains Only One Node
   } 
   
   else { // If The List Contains More Than One Node, Remove The Tail Node
@@ -260,37 +382,188 @@ void pop_back() {
 // If The Position Is Invalid, It Will Print An Error Message
 void remove(int pos) {
 
-  std::cout << "[SYSTEM] Removing Element With Position: " << pos << std::endl;
+  std::cout << "[SYSTEM] Attempting To Remove Element At Position: " << pos << std::endl;
 
- 
+  // === Guard Clause To Check If The Position Is Valid ===
+  // If The Position Is Invalid, It Will Print An Error Message
+  // This Will Indicate That The Position Is Out Of Bounds
+  // It Will Also Return If The Position Is Invalid
+  if (pos < 0 || pos > this->size) {
+      std::cout << "[ERROR] Invalid Position. Deletion Failure" << std::endl;
+      return; // Return If The Position Is Invalid
+  }
+
+  // === Traverse To The Node At The Specified Position (0-based index) ===
+  // This Will Traverse The List Until It Reaches The Node At The Specified Position
+  // It Will Print A Message Indicating The Element Being Taken Out 
+  Node<T>* current = this->head;
+  int currentIndex = 0;
+
+  // === While Loop To Traverse The List ===
+  // This Loop Will Continue Until The Node Pointer Reaches The End Of The List (nullptr)
+  // It Will Also Print The Data Of Each Node In The List
+  while (current != nullptr && currentIndex < pos) {
+      std::cout << "[SYSTEM] Current Node Data: " << current->data << std::endl;
+      current = current->next;
+      currentIndex++;
+  }
+
+  // === Guard Clause: Check If The Node To Remove Is Valid ===
+  // If The Node To Remove Is Nullptr, It Will Print An Error Message
+  // This Will Indicate That The Position Is Out Of Bounds
+  // It Will Also Return If The Node To Remove Is Nullptr
+  if (current == nullptr) {
+      std::cout << "[ERROR] Position out of bounds." << std::endl;
+      return;
+  }
+
+  // ===  Guard Clause: Check If The Node To Remove Is The Head ===
+  // If Node To Remove Is Head, This Will Remove The Head Node
+  // It Will Update The Head Pointer To Point To The Next Node
+  if (current == this->head) {
+      pop_front();
+      std::cout << "[SYSTEM] Element Removal At Position: Successful" << std::endl;
+      return;
+  }
+  // === Guard Clause: Check If The Node To Remove Is The Tail ===
+  // If Node To Remove Is Tail, This Will Remove The Tail Node
+  if (current == this->tail) {
+      pop_back();
+      std::cout << "[SYSTEM] Element Removal At Position: Successful" << std::endl;
+      return;
+  }
+
+  // === Remove Node From The Middle ===
+  // If The Node To Remove Is In The Middle, This Will Remove The Node
+  // It Will Update The Previous And Next Pointers Of The Adjacent Nodes
+  if (current->prev) current->prev->next = current->next;
+  if (current->next) current->next->prev = current->prev;
+
+  // === Delete The Current Node ===
+  // This Will Delete The Current Node And Free Up Memory
+  std::cout << "[SYSTEM] Removing Element At Position: " << pos << std::endl;
+  delete current;
+  this->size -= 1;
 
   std::cout << "[SYSTEM] Element Removal With Position: Successful" << std::endl;
+  return;
 }
 
 // === Remove An Element With Specific Data From The List ===
-// This Function Will Be In Use To Remove An Element With Specific Data From The List
-// It Will Traverse The List And Check Each Node's Data Against The Given Data
+// This Function Will Traverse The List And Check Each Node's Data Against The Given Data
 // If The Element Is Found, It Will Remove The Node Containing That Data
 void remove(const T& data) {
 
-  std::cout << "[SYSTEM] Removing Element With Data: " << data << std::endl;
+   std::cout << "[SYSTEM] Attempting To Remove Data: " << data << std::endl;
 
- 
+  // Traverse To The Node Containing The Specific Data
+  Node<T>* current = this->head;
+  while (current != nullptr) {
 
-  std::cout << "[SYSTEM] Element Removal With Data: Successful" << std::endl;
+      // === Check If Current Node Contains The Data ===
+      // If The Current Node Contains The Data, It Will Remove The Node
+      // It Will Also Print A Message Indicating That The Data Was Found And Taken Out 
+      if (current->data == data) {
+          std::cout << "[SYSTEM] Found Data: " << data << std::endl;
+
+          // If node is head
+          if (current == this->head) {
+              pop_front();
+              std::cout << "[SYSTEM] Element Removal: Successful" << std::endl;
+              return;
+          }
+          // If node is tail
+          if (current == this->tail) {
+              pop_back();
+  
+              std::cout << "[SYSTEM] Element Removal: Successful" << std::endl;
+              return;
+          }
+          // Node is in the middle
+          if (current->prev) current->prev->next = current->next;
+          if (current->next) current->next->prev = current->prev;
+          delete current;
+          this->size -= 1;
+          std::cout << "[SYSTEM] Element Removal: Successful" << std::endl;
+          return;
+      }
+
+      current = current->next; // Move To The Next Node
+  }
+
+  std::cout << "[ERROR] Data No Longer Found: " << data << std::endl;
 }
 
 // === Remove An Element With Specific Data At A Specific Position From The List ===
 // It Will Traverse The List Until It Reaches The Specific Position, Said By The User
 // If The Position Is Valid, It Will Remove The Node Containing That Data At That Position
 // If The Element Is Not Found, It Will Print A Message Indicating That The Element Was Not Found
-void remove(const T& data, int pos) {
+void remove(const T& data, const T& inputData, int pos) {
 
   std::cout << "[SYSTEM] Removing Element With Data: " << data << ", At Position: " << pos << std::endl;
 
- 
+  // === Guard Clause To Check If The Position Is Valid ===
+  // If The Position Is Invalid, It Will Print An Error Message
+  // This Will Indicate That The Position Is Out Of Bounds
+  if (pos < 0 || pos > this->size) {
+      std::cout << "[ERROR] Invalid Position. Deletion Failure" << std::endl;
+      return; // Return If The Position Is Invalid
+  }
 
-  std::cout << "[SYSTEM] Element Removal With Data/Position: Successful" << std::endl;
+  // === Traverse To The Node At The Specified Position (0-based index) ===
+  // This Will Traverse The List Until It Reaches The Node At The Specified Position
+  // It Will Print A Message Indicating The Element Being Taken Out 
+  Node<T>* current = this->head;
+  int currentIndex = 0;
+
+  // === While Loop To Traverse The List ===
+  // This Loop Will Continue Until The Node Pointer Reaches The End Of The List (nullptr)
+  // It Will Also Print The Data Of Each Node In The List
+  while (current != nullptr && currentIndex < pos) {
+      std::cout << "[SYSTEM] Current Node Data: " << current->data << std::endl;
+      current = current->next;
+      currentIndex++;
+  }
+
+  // === Guard Clause: Check If The Node To Remove Is Valid ===
+  // If The Node To Remove Is Nullptr, It Will Print An Error Message
+  // This Will Indicate That The Position Is Out Of Bounds
+  // It Will Also Return If The Node To Remove Is Nullptr
+  if (current == nullptr) {
+      std::cout << "[ERROR] Position out of bounds." << std::endl;
+      return;
+  }
+
+  // ===  Guard Clause: Check If The Node To Remove Is The Head ===
+  // If Node To Remove Is Head, This Will Remove The Head Node
+  // It Will Update The Head Pointer To Point To The Next Node
+  if (current == this->head) {
+      pop_front();
+      std::cout << "[SYSTEM] Element Removal At Position: Successful" << std::endl;
+      return;
+  }
+  // === Guard Clause: Check If The Node To Remove Is The Tail ===
+  // If Node To Remove Is Tail, This Will Remove The Tail Node
+  if (current == this->tail) {
+      pop_back();
+      std::cout << "[SYSTEM] Element Removal At Position: Successful" << std::endl;
+      return;
+  }
+
+  // === Remove Node From The Middle ===
+  // If The Node To Remove Is In The Middle, This Will Remove The Node
+  // It Will Update The Previous And Next Pointers Of The Adjacent Nodes
+  if (current->prev) current->prev->next = current->next;
+  if (current->next) current->next->prev = current->prev;
+
+  // === Delete The Current Node ===
+  // This Will Delete The Current Node And Free Up Memory
+  std::cout << "[SYSTEM] Removing Element At Position: " << pos << std::endl;
+  delete current;
+  this->size -= 1;
+
+  std::cout << "[SYSTEM] Element Removal With Position: Successful" << std::endl;
+  return;
 }
 
 // === Clear The List By Removing All Elements ===
@@ -301,7 +574,25 @@ void clear() {
 
   std::cout << "[SYSTEM] Clearing The List" << std::endl;
 
-  
+  Node<T>* current = this->head; // Create Pointer That Starts At The Head Of The List
+
+  // === While Loop To Traverse The List ===
+  // This Loop Will Continue Until The Node Pointer Reaches The End Of The List (nullptr)
+  // It Will Delete Each Node In The List
+  while (current != nullptr) {
+      Node<T>* next = current->next;
+
+      std::cout << "[SYSTEM] Deleting Node With Data: " << current->data << std::endl;
+
+      // === Delete The Current Node ===
+      // This Will Delete The Current Node And Free Up Memory
+      delete current;
+      current = next;
+  }
+
+  this->head = nullptr;
+  this->tail = nullptr;
+  this->size = 0;
 
   std::cout << "[SYSTEM] Clearing List: Successful" << std::endl;
 }
