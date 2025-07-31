@@ -80,134 +80,127 @@ int main() {
       std::cout << "[INFO] Option 11 - Clear List: Eliminate All Elements In List" << std::endl; 
       std::cout << "===============================================================" << std::endl; 
 
-      int userChoice; // Variable To Store User Input For Menu Selection
-      std::cin >> userChoice; // Wait For User Input To Proceed With The Program
-
-      // === Guard Clause To Check If User Input Is Valid ===
-      // If The User Input Is Not A Valid Number, It Will Print An Error Message
-      // If The User Input Is Less Than Or Equal To 0 Or Greater Than 10
-      if (userChoice < 0 || userChoice > 11) { // Check If The Input Is Not A Valid Number
-          std::cin.clear();
-          std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-          std::cout << "[ATTENTION] Invalid Input: Try Again" << std::endl;
-          std::cout << "[ERROR] Please Enter A Number...." << std::endl;
-          std::cout << "[ACTION] User: INPUT Number Between (1-11)" << std::endl;
-          continue;
-      }
-
-        if (userChoice == 1) { // Search
-          int inputData; // Search Function Should Receive User Input To Search Linkable List myList1  
-          std::cout << "[SYSTEM] User Made Selection For Search...." << std::endl;
-          std::cin >> inputData; 
-          myList1.search(inputData); // Call The Search Function To Search For An Element In The List
-          continue; // End Of Case 1: Search
-        }
-
-        if (userChoice == 2) { // Traversal
-          std::cout << "[SYSTEM] User Made Selection For Traversal...." << std::endl;
-          myList1.traversal(); // Call The Traversal Function To Display The List In Forward Order
-          continue; // End Of Case 2: Traversal
-        }
-
-        if (userChoice == 3) { // Reversal
-          std::cout << "[SYSTEM] User Made Selection For Reversal...." << std::endl;
-          myList1.reversal(); // Call The Reversal Function To Display The List In Reverse Order
-          continue; // End Of Case 3: Reversal
-        }
-
-        if (userChoice == 4) { // Push_Front
-          std::cout << "[SYSTEM] User Made Selection For Push_Front...." << std::endl;
-          myList1.push_front(50); // Add A New Element (50) To The Front Of The List
-          continue; // End Of Case 4: Push_Front
-        }
-
-        if (userChoice == 5) { // Push_Back
-          std::cout << "[SYSTEM] User Made Selection For Push_Back...." << std::endl;
-          myList1.push_back(15); // Add A New Element (15) To The End Of The List
-          continue; // End Of Case 5: Push_Back
-        }
-
-        if (userChoice == 6) { // Pop_Front
-          std::cout << "[SYSTEM] User Made Selection For Pop_Front...." << std::endl;
-          myList1.pop_front(); // Remove The First Element From The List
-          continue; // End Of Case 6: Pop_Front
-        }
-
-        if (userChoice == 7) { // Pop_Back
-          std::cout << "[SYSTEM] User Made Selection For Pop_Back...." << std::endl;
-          myList1.pop_back(); // Remove The Last Element From The List
-          continue; // End Of Case 7: Pop_Back
-
-        }
-
-        if (userChoice == 8) { // Insert
-          int inputData; // Insert Function Should Receive User Input To Insert Into Linkable List myList1
-          int pos; // Variable To Store User Input For Position To Insert At
-
-          std::cout << "[SYSTEM] User Made Selection For Insert...." << std::endl;
-          std::cout << "[ACTION] Enter The Position To Insert At: ";
-          std::cin >> pos; // Get User Input For The Position To Insert At
-
-          std::cout << "[ACTION] Enter The Value To Insert: ";
-          std::cin >> inputData; // Get User Input For The Value To Insert
-
-          // Call The Insert Function To Insert A New Element At The Specific Position
-          myList1.insert(inputData, pos); // Insert The User Input At Position 'pos'
-          continue;
-        }
-
-        if (userChoice == 9) { // Get
-          int inputData; // Get Function Should Receive User Input To Get Data From Linkable List myList1
-          int pos; // Variable To Store User Input For Position To Get At
-
-          std::cout << "[SYSTEM] User Made Selection For Get...." << std::endl;
-
-          std::cout << "[ACTION] Enter The Position To Get: ";
-          std::cin >> pos; // Get User Input For The Position To Get
-
-          myList1.get(pos); // Get The Element At Position 'pos'
-          continue;
-        }
-
-        if (userChoice == 10) { // Removal
-
-          std::cout << "[SYSTEM] User Made Selection For Remove...." << std::endl;
-
-          int inputData; // Remove Function Should Receive User Input To Remove From Linkable List myList1
-          int pos; // Variable To Store User Input For Position To Remove At
-
-          std::cout << "[ACTION] Enter The Position To Remove At: ";
-          std::cin >> pos; // Get User Input For The Position To Remove At
-
-          std::cout << "[ACTION] Enter The Value To Remove: ";
-          std::cin >> inputData; // Get User Input For The Value To Remove
-
-          myList1.remove(1, inputData, pos); // Remove The Element With The Given Data From The List
-          // Note: This Will Remove The First Occurrence Of The Element With The Given Data
-
-          continue;
-        }
-
-        if (userChoice == 11) { // Clear List
-
-          std::cout << "[SYSTEM] User Made Selection For Clear...." << std::endl;
-
-          myList1.clear(); // Clear The List By Removing All Elements
-          continue;
-        }
-
-        else if (userChoice == 0) { // Quit
-
-          std::cout << "[SYSTEM] User Made Selection For Quit...." << std::endl;
-          break; // Exit The Loop If The User Chooses To Quit
-        }
-
-        else { // Wait For User Input
-
+      int userChoice; // Variable To Store User Input For The Selected Option
+      while (true) // Loop Until Valid Input Is Received
+      {
           std::cout << "[SYSTEM] Waiting For User Inputs: From (1-11)" << std::endl;
           std::cout << "[ACTION] User: Please Make An Input To Console" << std::endl;
-          continue; // Continue The Loop If The User Input Is Not Valid
-        }
+          
+          if (std::cin >> userChoice && userChoice >= 0 && userChoice <= 11) 
+          break; // Check If The Input Is Valid (An Integer Between 0 And 11)
+          // If The Input Is Valid, Break Out Of The Loop      
+
+          std::cin.clear(); // Clear The Error State Of cin
+          std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+          std::cout << "[ERROR] Invalid Selection: Try Again." << std::endl;
+          std::cout << "[ACTION] INPUT A Number Between (0-11)" << std::endl;
+      }
+
+      if (userChoice == 1) { // Search
+        int inputData; // Search Function Should Receive User Input To Search Linkable List myList1  
+        std::cout << "[SYSTEM] User Made Selection For Search...." << std::endl;
+        std::cin >> inputData; 
+        myList1.search(inputData); // Call The Search Function To Search For An Element In The List
+        continue; // End Of Case 1: Search
+      }
+
+      if (userChoice == 2) { // Traversal
+        std::cout << "[SYSTEM] User Made Selection For Traversal...." << std::endl;
+        myList1.traversal(); // Call The Traversal Function To Display The List In Forward Order
+        continue; // End Of Case 2: Traversal
+      }
+
+      if (userChoice == 3) { // Reversal
+        std::cout << "[SYSTEM] User Made Selection For Reversal...." << std::endl;
+        myList1.reversal(); // Call The Reversal Function To Display The List In Reverse Order
+        continue; // End Of Case 3: Reversal
+      }
+
+      if (userChoice == 4) { // Push_Front
+        std::cout << "[SYSTEM] User Made Selection For Push_Front...." << std::endl;
+        myList1.push_front(50); // Add A New Element (50) To The Front Of The List
+        continue; // End Of Case 4: Push_Front
+      }
+
+      if (userChoice == 5) { // Push_Back
+        std::cout << "[SYSTEM] User Made Selection For Push_Back...." << std::endl;
+        myList1.push_back(15); // Add A New Element (15) To The End Of The List
+        continue; // End Of Case 5: Push_Back
+      }
+
+      if (userChoice == 6) { // Pop_Front
+        std::cout << "[SYSTEM] User Made Selection For Pop_Front...." << std::endl;
+        myList1.pop_front(); // Remove The First Element From The List
+        continue; // End Of Case 6: Pop_Front
+      }
+
+      if (userChoice == 7) { // Pop_Back
+        std::cout << "[SYSTEM] User Made Selection For Pop_Back...." << std::endl;
+        myList1.pop_back(); // Remove The Last Element From The List
+        continue; // End Of Case 7: Pop_Back
+
+      }
+
+      if (userChoice == 8) { // Insert
+        int inputData; // Insert Function Should Receive User Input To Insert Into Linkable List myList1
+        int pos; // Variable To Store User Input For Position To Insert At
+
+        std::cout << "[SYSTEM] User Made Selection For Insert...." << std::endl;
+        std::cout << "[ACTION] Enter The Position To Insert At: ";
+        std::cin >> pos; // Get User Input For The Position To Insert At
+
+        std::cout << "[ACTION] Enter The Value To Insert: ";
+        std::cin >> inputData; // Get User Input For The Value To Insert
+
+        // Call The Insert Function To Insert A New Element At The Specific Position
+        myList1.insert(inputData, pos); // Insert The User Input At Position 'pos'
+        continue;
+      }
+
+      if (userChoice == 9) { // Get
+        int inputData; // Get Function Should Receive User Input To Get Data From Linkable List myList1
+        int pos; // Variable To Store User Input For Position To Get At
+
+        std::cout << "[SYSTEM] User Made Selection For Get...." << std::endl;
+
+        std::cout << "[ACTION] Enter The Position To Get: ";
+        std::cin >> pos; // Get User Input For The Position To Get
+
+        myList1.get(pos); // Get The Element At Position 'pos'
+        continue;
+      }
+
+      if (userChoice == 10) { // Removal
+
+        std::cout << "[SYSTEM] User Made Selection For Remove...." << std::endl;
+
+        int inputData; // Remove Function Should Receive User Input To Remove From Linkable List myList1
+        int pos; // Variable To Store User Input For Position To Remove At
+
+        std::cout << "[ACTION] Enter The Position To Remove At: ";
+        std::cin >> pos; // Get User Input For The Position To Remove At
+
+        std::cout << "[ACTION] Enter The Value To Remove: ";
+        std::cin >> inputData; // Get User Input For The Value To Remove
+
+        myList1.remove(1, inputData, pos); // Remove The Element With The Given Data From The List
+        // Note: This Will Remove The First Occurrence Of The Element With The Given Data
+
+        continue;
+      }
+
+      if (userChoice == 11) { // Clear List
+
+        std::cout << "[SYSTEM] User Made Selection For Clear...." << std::endl;
+        myList1.clear(); // Clear The List By Removing All Elements
+        continue; 
+      }
+
+      else if (userChoice == 0) { // Quit
+
+        std::cout << "[SYSTEM] User Made Selection For Quit...." << std::endl;
+        break; // Exit The Loop If The User Chooses To Quit
+      }
     } // End Of While Loop
 
     return 0; // Return 0 To Indicate Successful Execution Of The Program
