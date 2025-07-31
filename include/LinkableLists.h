@@ -24,7 +24,7 @@ public:
 // It Initializes The Linkable List By Creating Nodes For Each Element In The Array
 // It Sets The Head Node To Point To The First Element And The Tail Node To Point To The Last Element
 // It Also Initializes The Previous And Next Pointers For Each Node To Maintain The Linkable Structure
-LinkableLists(T myListArray[], int count) { // Takes IN 
+LinkableLists(T myListArray[], int count) { 
 
   std::cout << "[SYSTEM] LinkableLists Initializing" << std::endl;
 
@@ -32,8 +32,11 @@ LinkableLists(T myListArray[], int count) { // Takes IN
   this->tail = nullptr; // Initialize The Tail Pointer To Null
   this->size = 0; // Initialize The Size To 0
 
+  // === For Loop To Create Nodes From The Array ===
+  // This Loop Will Iterate Over Each Element In The Array
+  // It Will Create A New Node For Each Element And Link Them Together
   for (int i = 0; i < count; i++) {
-      push_back(myListArray[i]); // Use your existing push_back logic
+      push_back(myListArray[i]); // Use The Push_Back Method To Add Each Element To The End Of The List
   }
 
   std::cout << "[SYSTEM] LinkableLists Initialization: Successful" << std::endl;
@@ -107,9 +110,11 @@ void search(const T& inputData) {
 
   std::cout << "[SYSTEM] Searching For An Element In The List" << std::endl;
 
+  // === Guard Clause To Check If The List Is Empty ===
+  // If The List Is Empty, It Will Print A Message Indicating That There Is Nothing To Search
   if (head == nullptr) {
       std::cout << "[WARNING] List Is Empty — Nothing To Search" << std::endl;
-      return;
+      return; // Return If The List Is Empty
   }
 
   Node<T>* node = this->head; // Create Pointer That Starts At The Head Of The List  
@@ -135,7 +140,6 @@ void search(const T& inputData) {
 
   std::cout << "[SYSTEM] Search Operation: Complete" << std::endl;
 }
-
 
 // === Get The Element At A Specific Position In The List ===
 // It Will Traverse The List Until It Reaches The Specified Position
@@ -256,6 +260,8 @@ void insert(const T& inputData, int pos) {
 
   std::cout << "[SYSTEM] Attempting To Insert New Element At Position: " << pos << std::endl;
 
+  // === Guard Clause To Check If The Position Is Valid ===
+  // If The Position Is Invalid, It Will Print An Error Message
   if (pos < 0 || pos > this->size) {
       std::cout << "[ERROR] Invalid Position. Insertion Failure" << std::endl;
       return; // Return If The Position Is Invalid
@@ -265,33 +271,44 @@ void insert(const T& inputData, int pos) {
 
   std::cout << "[SYSTEM] Inserting Element: " << inputData << " At Position: " << pos << std::endl;
 
-  if (pos == 0) {
-      push_front(inputData);
-      return;
+  if (pos == 0) { // If The Position Is 0, Insert The New Node At The Front Of The List
+      std::cout << "[SYSTEM] Inserting At The Front Of The List" << std::endl;
+      push_front(inputData); // Use The Push_Front Method To Add The New Node To The Front
+      std::cout << "[SYSTEM] Insert Operation: Complete" << std::endl;
+      return; // End Of Case 1: Insert At Front
   }
-  if (pos == this->size) {
-      push_back(inputData);
-      return;
+  if (pos == this->size) { // If The Position Is Equal To The Size, Insert The New Node At The Back Of The List
+      std::cout << "[SYSTEM] Inserting At The Back Of The List" << std::endl;
+      push_back(inputData); // Use The Push_Back Method To Add The New Node To The Back
+      std::cout << "[SYSTEM] Insert Operation: Complete" << std::endl;
+      return; // End Of Case 2: Insert At Back
   }
 
-  Node<T>* current = this->head;
-  int currentIndex = 0;
+  Node<T>* current = this->head; // Create Pointer That Starts At The Head Of The List
+
+  int currentIndex = 0; // Initialize Current Index Counter To 0
+
+  // === While Loop To Traverse The List Until The Specified Position ===
+  // This Loop Will Continue Until The Node Pointer Reaches The Specified Position
+  // It Will Also Check If The Current Index Is Less Than The Position To Insert
   while (current != nullptr && currentIndex < pos) {
-      current = current->next;
-      currentIndex++;
+      current = current->next; // Move The Node Pointer To The Next Node In The List
+      currentIndex++; // Increase The Current Index Counter By One After Cycling Through Each Node
   }
 
+  // === Guard Clause To Check If The Current Pointer Is Null ===
+  // If The Current Pointer Is Null, It Means The Position Is Out Of Bounds
   if (current == nullptr) {
       std::cout << "[ERROR] Position Out Of Bounds During Insertion" << std::endl;
-      delete newNode;
-      return;
+      delete newNode; // Clean Up The New Node To Avoid Memory Leak
+      return; // Exit The Function If The Current Pointer Is Null
   }
 
-  newNode->prev = current->prev;
-  newNode->next = current;
-  if (current->prev) current->prev->next = newNode;
-  current->prev = newNode;
-  this->size += 1;
+  newNode->prev = current->prev; // Set The Previous Pointer Of The New Node To The Previous Node
+  newNode->next = current; // Set The Next Pointer Of The New Node To The Current Node
+  if (current->prev) current->prev->next = newNode; // Set The Next Pointer Of The Previous Node To The New Node  
+  current->prev = newNode; // Set The Previous Pointer Of The Current Node To The New Node
+  this->size += 1; // Increment The Size Since We Added A New Node
 
   std::cout << "[SYSTEM] Insert Operation: Complete" << std::endl;
 }
@@ -338,6 +355,10 @@ void pop_front() {
   }
 }
 
+// === Remove The Last Element From The List And Return Its Value ===
+// This Function Will Remove The Last Element From The List And Return Its Value
+// It Will Also Update The Tail Pointer To Point To The New Last Element
+// If The List Is Empty, It Will Return -1 Or An Appropriate Error Value
 void pop_back() {
 
   std::cout << "[SYSTEM] Pop_Back: In Progress" << std::endl;
@@ -393,19 +414,16 @@ void remove(int pos) {
       return; // Return If The Position Is Invalid
   }
 
-  // === Traverse To The Node At The Specified Position (0-based index) ===
-  // This Will Traverse The List Until It Reaches The Node At The Specified Position
-  // It Will Print A Message Indicating The Element Being Taken Out 
-  Node<T>* current = this->head;
-  int currentIndex = 0;
+  Node<T>* current = this->head; // Create Pointer That Starts At The Head Of The List
+  int currentIndex = 0; // Initialize Current Index Counter To 0
 
   // === While Loop To Traverse The List ===
   // This Loop Will Continue Until The Node Pointer Reaches The End Of The List (nullptr)
   // It Will Also Print The Data Of Each Node In The List
   while (current != nullptr && currentIndex < pos) {
       std::cout << "[SYSTEM] Current Node Data: " << current->data << std::endl;
-      current = current->next;
-      currentIndex++;
+      current = current->next; // Move The Node Pointer To The Next Node In The List
+      currentIndex++; // Increase The Current Index Counter By One After Cycling Through Each Node
   }
 
   // === Guard Clause: Check If The Node To Remove Is Valid ===
@@ -414,7 +432,7 @@ void remove(int pos) {
   // It Will Also Return If The Node To Remove Is Nullptr
   if (current == nullptr) {
       std::cout << "[ERROR] Position out of bounds." << std::endl;
-      return;
+      return; // Return If The Node To Remove Is Nullptr
   }
 
   // ===  Guard Clause: Check If The Node To Remove Is The Head ===
@@ -423,14 +441,14 @@ void remove(int pos) {
   if (current == this->head) {
       pop_front();
       std::cout << "[SYSTEM] Element Removal At Position: Successful" << std::endl;
-      return;
+      return; // Return If The Node To Remove Is The Head
   }
   // === Guard Clause: Check If The Node To Remove Is The Tail ===
   // If Node To Remove Is Tail, This Will Remove The Tail Node
   if (current == this->tail) {
       pop_back();
       std::cout << "[SYSTEM] Element Removal At Position: Successful" << std::endl;
-      return;
+      return; // Return If The Node To Remove Is The Tail
   }
 
   // === Remove Node From The Middle ===
@@ -442,11 +460,11 @@ void remove(int pos) {
   // === Delete The Current Node ===
   // This Will Delete The Current Node And Free Up Memory
   std::cout << "[SYSTEM] Removing Element At Position: " << pos << std::endl;
-  delete current;
-  this->size -= 1;
+  delete current; // Delete The Current Node And Free Up Memory
+  this->size -= 1; // Decrement The Size Since We Removed A Node
 
   std::cout << "[SYSTEM] Element Removal With Position: Successful" << std::endl;
-  return;
+  return; // Return If The Node To Remove Is In The Middle
 }
 
 // === Remove An Element With Specific Data From The List ===
@@ -456,8 +474,11 @@ void remove(const T& data) {
 
    std::cout << "[SYSTEM] Attempting To Remove Data: " << data << std::endl;
 
-  // Traverse To The Node Containing The Specific Data
-  Node<T>* current = this->head;
+  Node<T>* current = this->head; // Create Pointer That Starts At The Head Of The List
+
+  // === While Loop To Traverse The List ===
+  // This Loop Will Continue Until The Node Pointer Reaches The End Of The List (nullptr)
+  // It Will Also Print The Data Of Each Node In The List, If The Node Is Not The Head
   while (current != nullptr) {
 
       // === Check If Current Node Contains The Data ===
@@ -466,28 +487,36 @@ void remove(const T& data) {
       if (current->data == data) {
           std::cout << "[SYSTEM] Found Data: " << data << std::endl;
 
-          // If node is head
+          // === Guard Clause: Check If The Node To Remove Is The Head ===
+          // If Node To Remove Is Head, This Will Remove The Head Node
           if (current == this->head) {
-              pop_front();
+              pop_front(); // Set The Head Pointer To The Next Node
               std::cout << "[SYSTEM] Element Removal: Successful" << std::endl;
-              return;
+              return; // Return If The Node To Remove Is The Head
           }
-          // If node is tail
+         
+          // === Guard Clause: Check If The Node To Remove Is The Tail ===
+          // If Node To Remove Is Tail, This Will Remove The Tail Node
           if (current == this->tail) {
-              pop_back();
-  
+              pop_back(); // Set The Tail Pointer To The Previous Node 
               std::cout << "[SYSTEM] Element Removal: Successful" << std::endl;
-              return;
+              return; // Return If The Node To Remove Is The Tail
           }
-          // Node is in the middle
-          if (current->prev) current->prev->next = current->next;
-          if (current->next) current->next->prev = current->prev;
-          delete current;
-          this->size -= 1;
-          std::cout << "[SYSTEM] Element Removal: Successful" << std::endl;
-          return;
-      }
 
+          // === Remove Node From The Middle ===
+          // If The Node To Remove Is In The Middle, This Will Remove The Node
+          // It Will Update The Previous And Next Pointers Of The Adjacent Nodes
+          if (current->prev) current->prev->next = current->next;
+
+          // === Update The Next Pointer Of The Next Node ===
+          // If The Node To Remove Is In The Middle, This Will Update The Next Pointer Of The Next Node
+          // This Will Ensure That The Next Node's Previous Pointer Gets An Update Correctly
+          if (current->next) current->next->prev = current->prev;
+          delete current; // Delete The Current Node And Free Up Memory
+          this->size -= 1; // Decrement The Size Since We Removed A Node
+          std::cout << "[SYSTEM] Element Removal: Successful" << std::endl;
+          return; // Return If The Node To Remove Is In The Middle
+      }
       current = current->next; // Move To The Next Node
   }
 
@@ -510,19 +539,16 @@ void remove(const T& data, const T& inputData, int pos) {
       return; // Return If The Position Is Invalid
   }
 
-  // === Traverse To The Node At The Specified Position (0-based index) ===
-  // This Will Traverse The List Until It Reaches The Node At The Specified Position
-  // It Will Print A Message Indicating The Element Being Taken Out 
-  Node<T>* current = this->head;
-  int currentIndex = 0;
+  Node<T>* current = this->head; // Create Pointer That Starts At The Head Of The List
+  int currentIndex = 0; // Initialize Current Index To 0
 
   // === While Loop To Traverse The List ===
   // This Loop Will Continue Until The Node Pointer Reaches The End Of The List (nullptr)
   // It Will Also Print The Data Of Each Node In The List
   while (current != nullptr && currentIndex < pos) {
       std::cout << "[SYSTEM] Current Node Data: " << current->data << std::endl;
-      current = current->next;
-      currentIndex++;
+      current = current->next; // Move The Node Pointer To The Next Node In The List
+      currentIndex++; // Increase The Current Index By One After Cycling Through Each Node
   }
 
   // === Guard Clause: Check If The Node To Remove Is Valid ===
@@ -531,39 +557,43 @@ void remove(const T& data, const T& inputData, int pos) {
   // It Will Also Return If The Node To Remove Is Nullptr
   if (current == nullptr) {
       std::cout << "[ERROR] Position out of bounds." << std::endl;
-      return;
+      return; // Return If The Node To Remove Is Nullptr
   }
 
   // ===  Guard Clause: Check If The Node To Remove Is The Head ===
   // If Node To Remove Is Head, This Will Remove The Head Node
   // It Will Update The Head Pointer To Point To The Next Node
   if (current == this->head) {
-      pop_front();
+      pop_front(); // Set The Head Pointer To The Next Node
       std::cout << "[SYSTEM] Element Removal At Position: Successful" << std::endl;
-      return;
+      return; // Return If The Node To Remove Is The Head
   }
   // === Guard Clause: Check If The Node To Remove Is The Tail ===
   // If Node To Remove Is Tail, This Will Remove The Tail Node
   if (current == this->tail) {
-      pop_back();
+      pop_back(); // Set The Tail Pointer To The Previous Node
       std::cout << "[SYSTEM] Element Removal At Position: Successful" << std::endl;
-      return;
+      return; // Return If The Node To Remove Is The Tail
   }
 
   // === Remove Node From The Middle ===
   // If The Node To Remove Is In The Middle, This Will Remove The Node
   // It Will Update The Previous And Next Pointers Of The Adjacent Nodes
   if (current->prev) current->prev->next = current->next;
+
+  // === Update The Next Pointer Of The Next Node ===
+  // If The Node To Remove Is In The Middle, This Will Update The Next Pointer Of The Next Node
+  // This Will Ensure That The Next Node's Previous Pointer Gets An Update Correctly
   if (current->next) current->next->prev = current->prev;
 
   // === Delete The Current Node ===
   // This Will Delete The Current Node And Free Up Memory
   std::cout << "[SYSTEM] Removing Element At Position: " << pos << std::endl;
-  delete current;
-  this->size -= 1;
+  delete current; // Delete The Current Node
+  this->size -= 1; // Decrement The Size Since We Made A Node Removal
 
   std::cout << "[SYSTEM] Element Removal With Position: Successful" << std::endl;
-  return;
+  return; // Return If The Node To Remove Is In The Middle
 }
 
 // === Clear The List By Removing All Elements ===
@@ -580,19 +610,19 @@ void clear() {
   // This Loop Will Continue Until The Node Pointer Reaches The End Of The List (nullptr)
   // It Will Delete Each Node In The List
   while (current != nullptr) {
-      Node<T>* next = current->next;
+      Node<T>* next = current->next; // Store The Next Node In A Temporary Variable
 
       std::cout << "[SYSTEM] Deleting Node With Data: " << current->data << std::endl;
 
       // === Delete The Current Node ===
       // This Will Delete The Current Node And Free Up Memory
       delete current;
-      current = next;
+      current = next; // Move The Node Pointer To The Next Node In The List
   }
 
-  this->head = nullptr;
-  this->tail = nullptr;
-  this->size = 0;
+  this->head = nullptr; // Set The Head Pointer To Null
+  this->tail = nullptr; // Set The Tail Pointer To Null
+  this->size = 0; // Reset The Size To 0
 
   std::cout << "[SYSTEM] Clearing List: Successful" << std::endl;
 }
