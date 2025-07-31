@@ -86,7 +86,7 @@ int main() {
       // === Guard Clause To Check If User Input Is Valid ===
       // If The User Input Is Not A Valid Number, It Will Print An Error Message
       // If The User Input Is Less Than Or Equal To 0 Or Greater Than 10
-      if (!(std::cin >> userChoice) || userChoice < 0 || userChoice > 11) { // Check If The Input Is Not A Valid Number
+      if (userChoice < 0 || userChoice > 11) { // Check If The Input Is Not A Valid Number
           std::cin.clear();
           std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
           std::cout << "[ATTENTION] Invalid Input: Try Again" << std::endl;
