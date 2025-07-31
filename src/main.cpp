@@ -41,7 +41,8 @@ int main() {
     std::cout << "========================================================================" << std::endl; 
 
     std::cout << "[SYSTEM] Initializing Linkable-List(s) Control Interface..." << std::endl;
-    std::cout << "[SYSTEM] Initializing Linkable-List(s) Input Wizard..." << std::endl;
+    std::cout << "[SYSTEM] Initializing Control Interface's Input Wizard..." << std::endl;
+    std::cout << "[ACTION] Please Stand By: WAIT - LOADING User Interface..." << std::endl;
 
     // === Create An Instance Of The LinkableLists Class ===
     // This Instance Will Be Initialized With The Array And The Count Of Elements In The Array
@@ -78,19 +79,6 @@ int main() {
       
       int userInput = 0; // Variable To Store User Input For Program Continuation
       std::cin >> userInput; // Wait For User Input To Proceed With The Program
-     
-      // std::string inValidCharacter; // Variable To Store Invalid Character Input From User 
-
-      // // === Guard Clause To Check If User Input Is Not A Number ===
-      // // If The User Input Is Not A Valid Number, It Will Print An Error Message
-      // if (std::getline(std::cin, inValidCharacter)) {
-
-      //   std::cout << "[ATTENTION] Invalid Input: Try Again" << std::endl;
-      //   std::cout << "[ERROR] Please Enter A Number: NOT A CHAR" << std::endl;
-      //   std::cout << "[ACTION] User: INPUT Number Between (1-10)" << std::endl;
-
-      //   return 1; // Return If The User Input Is Not A Number
-      // }
 
       // === Guard Clause To Check If User Input Is Valid ===
       // If The User Input Is Not A Valid Number, It Will Print An Error Message

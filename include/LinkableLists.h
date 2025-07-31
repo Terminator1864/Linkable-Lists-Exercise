@@ -173,6 +173,7 @@ void insert(const T& data, int pos) {
 
   std::cout << "[SYSTEM] Attempting To Insert New Element" << pos << std::endl;
 
+  
 
   std::cout << "[SYSTEM] Inserting Element: " << data << " At Position: " << pos << std::endl;
 }

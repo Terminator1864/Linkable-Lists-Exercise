@@ -20,16 +20,20 @@ public:
   Node<T>* prev = nullptr; // Pointer ("Pointing" To The Address Location) To Previous Node In The Sequence
   T data; // Data Field To Store The Value Of The Node
 
+  // === Default Dummy Constructor ===
+  // This Dummy Constructor Initializes The Node With Default Values
   Node() { // "Dummy Node - Temporary Node": So We Do Not Loose Track When changing About Nodes/Etc.
-      this->next = nullptr;
-      this->prev = nullptr;
-      this->data = T();
+      this->next = nullptr; // Initialize The Next Pointer To Nullptr
+      this->prev = nullptr; // Initialize The Previous Pointer To Nullptr
+      this->data = T(); // Initialize The Data Field To Default Value
   }
 
+  // === Constructor To Initialize The Node With Data ===
+  // This Constructor Takes A Data Value As An Argument And Initializes The Node With That Value
   Node(T data) {
-      this->next = nullptr;
-      this->prev = nullptr; 
-      this->data = data;
+      this->next = nullptr; // Initialize The Next Pointer To Nullptr
+      this->prev = nullptr; // Initialize The Previous Pointer To Nullptr
+      this->data = data; // Initialize The Data Field To The Given Value
   }
 };
 
