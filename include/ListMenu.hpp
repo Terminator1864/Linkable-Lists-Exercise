@@ -35,15 +35,6 @@ public:
     // It Takes Three LinkableLists As Arguments, Allowing The Menu To Interact With Them
     explicit ListMenu(ListT& list, ListT& list2, ListT& list3) : myList1(list), myList2(list2), myList3(list3) {}
 
-    // === Run The Menu ===
-    // This Function Displays The Menu Options And Handles User Input To Perform Actions
-    // It Will Continue To Run Until The User Chooses To Quit, Allowing The User To Interact With The Linkable Lists
-    template<typename T1, typename T2, typename T3> // Function Template Declaration
-
-    // === runMenuWizard Function ===
-    // This Function Will Run The Menu Wizard, Allowing The User To Interact With The Linkable Lists
-    void runMenuWizard(LinkableLists<T1>& ints, LinkableLists<T2>& chars, LinkableLists<T3>& doubles);
-
 // === Privately Inaccessible Interface ===
 // The Private Access Specifier Restricts Access To These Members From Outside The Class
 // This Is Useful For Encapsulating The Internal Structure Of The Linkable Lists
@@ -59,6 +50,51 @@ private:
     // It Will Be In Use To Call Functions Like Search, Traversal, Reversal, Push_Front, Push_Back, Pop_Front, Pop_Back, Insert, Get, Remove, And Clear
 };
 
-#endif // End Of LISTMENU
+// === Namespace Declaration For JRI (Johnston's Robotics Industries) ===
+// This Namespace Contains Functions That Is A Part Of The JRI Linkable List Program
+namespace JRI_MenuSelection { // Namespace Declaration For JRI (Johnston's Robotics Industries)
 
+    // Note: The Namespace Is For Organizing Code And Avoiding Name Conflicts
+    // It Allows The Code To Be Grouped Logically And Makes It Easier To Understand
+
+    // === Run The Menu ===
+    // This Function Displays The Menu Options And Handles User Input To Perform Actions
+    // It Will Continue To Run Until The User Chooses To Quit, Allowing The User To Interact With The Linkable Lists
+    template<typename T1, typename T2, typename T3> // Function Template Declaration
+
+    // === runMenuWizard Function ===
+    // This Function Will Run The Menu Wizard, Allowing The User To Interact With The Linkable Lists
+    void runMenuWizardInts(LinkableLists<T1>& ints, LinkableLists<T2>& chars, LinkableLists<T3>& doubles);
+
+    // === Run The Menu ===
+    // This Function Displays The Menu Options And Handles User Input To Perform Actions
+    // It Will Continue To Run Until The User Chooses To Quit, Allowing The User To Interact With The Linkable Lists
+    template<typename T1, typename T2, typename T3> // Function Template Declaration
+
+    // === runMenuWizard Function ===
+    // This Function Will Run The Menu Wizard, Allowing The User To Interact With The Linkable Lists
+    void runMenuWizardChars(LinkableLists<T1>& ints, LinkableLists<T2>& chars, LinkableLists<T3>& doubles);
+
+    // === Run The Menu ===
+    // This Function Displays The Menu Options And Handles User Input To Perform Actions
+    // It Will Continue To Run Until The User Chooses To Quit, Allowing The User To Interact With The Linkable Lists
+    template<typename T1, typename T2, typename T3> // Function Template Declaration
+
+    // === runMenuWizard Function ===
+    // This Function Will Run The Menu Wizard, Allowing The User To Interact With The Linkable Lists
+    void runMenuWizardDoubles(LinkableLists<T1>& ints, LinkableLists<T2>& chars, LinkableLists<T3>& doubles);
+
+    // === Run The Menu ===
+    // This Function Displays The Menu Options And Handles User Input To Perform Actions
+    // It Will Continue To Run Until The User Chooses To Quit, Allowing The User To Interact With The Linkable Lists
+    template<typename T1, typename T2, typename T3>
+
+    // === startMenu Function ===
+    // This Function Will Start The Menu, Allowing The User To Interact With The Linkable Lists
+    // It Will Display The Menu Options And Wait For User Input To Perform Actions
+    void startMenu(LinkableLists<T1>&, LinkableLists<T2>&, LinkableLists<T3>&);
+}
+
+#endif // End Of LISTMENU_HPP
+// This Ends The Header Guard, Preventing Multiple Inclusions Of This Header File
 
