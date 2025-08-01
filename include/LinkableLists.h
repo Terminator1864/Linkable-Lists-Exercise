@@ -58,6 +58,8 @@ LinkableLists() {
   std::cout << "[SYSTEM] Empty LinkableLists Initialization: Successful" << std::endl;
 }
 
+
+
 // === Traversal Function To Display The List In Forward Order ===
 // This Function Will Display The List In Forward Order By Traversing From The Head To The Tail
 // It Will Print The Data Of Each Node Until It Reaches The Tail Node.
@@ -528,12 +530,12 @@ void remove(const T& data) {
 // If The Element Is Not Found, It Will Print A Message Indicating That The Element Was Not Found
 void remove(const T& data, const T& inputData, int pos) {
 
-  std::cout << "[SYSTEM] Removing Element With Data: " << data << ", At Position: " << pos << std::endl;
+  std::cout << "[SYSTEM] Removing Element With Data: " << inputData << ", At Position: " << pos << std::endl;
 
   // === Guard Clause To Check If The Position Is Valid ===
   // If The Position Is Invalid, It Will Print An Error Message
   // This Will Indicate That The Position Is Out Of Bounds
-  if (pos < 0 || pos > this->size) {
+  if (pos < 0 || pos >= this->size) {
       std::cout << "[ERROR] Invalid Position. Deletion Failure" << std::endl;
       return; // Return If The Position Is Invalid
   }
@@ -557,6 +559,12 @@ void remove(const T& data, const T& inputData, int pos) {
   if (current == nullptr) {
       std::cout << "[ERROR] Position out of bounds." << std::endl;
       return; // Return If The Node To Remove Is Nullptr
+  }
+
+  if (current->data != inputData) {                       //  <=  FIX
+      std::cout << "[ERROR] Data Mismatch: Element Removal Failure." << std::endl;
+      std::cout << "[SYSTEM] Please Double Check Data Manual Entry." << std::endl;
+      return;
   }
 
   // ===  Guard Clause: Check If The Node To Remove Is The Head ===
@@ -624,6 +632,49 @@ void clear() {
   this->size = 0; // Reset The Size To 0
 
   std::cout << "[SYSTEM] Clearing List: Successful" << std::endl;
+}
+
+// === Sort The List In Ascending Or Descending Order ===
+// Guard-First Bubble Sort — Swaps DATA only
+void sortList(bool ascending = true) {
+    std::cout << "[SYSTEM] sortList: Beginning Sort Operation" << std::endl;
+
+    // Guard: empty or single element
+    if (this->head == nullptr || this->head->next == nullptr) {
+        std::cout << "[WARNING] sortList: List Empty Or Only One Element — No Sorting Needed" << std::endl;
+        return;
+    }
+
+    bool swapped;  // single control flag
+
+    do {
+        swapped = false;
+        std::cout << "[SYSTEM] sortList: Iterating Through The List" << std::endl;
+        Node<T>* current = this->head;
+
+        while (current && current->next) {
+            bool mustSwap =
+                 ( ascending && current->data > current->next->data) ||
+                 (!ascending && current->data < current->next->data);
+
+            if (!mustSwap) {           // guard-first — no nested success
+                current = current->next;
+                continue;
+            }
+
+            std::cout << "[INFO] Swapping: "
+                      << current->data << " <-> " << current->next->data << std::endl;
+
+            T tmp                = current->data;
+            current->data        = current->next->data;
+            current->next->data  = tmp;
+            swapped              = true;     // keep the outer loop alive
+
+            current = current->next;
+        }
+    } while (swapped);                       // exits when a full pass makes no swaps
+
+    std::cout << "[SYSTEM] sortList: Sort Operation Complete" << std::endl;
 }
 
 // === Private Data Members ===

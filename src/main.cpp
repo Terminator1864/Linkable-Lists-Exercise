@@ -19,6 +19,9 @@ void runMenuWizardInts(LinkableLists<T1>& ints, LinkableLists<T2>& chars, Linkab
 template<typename T1, typename T2, typename T3>
 void runMenuWizardChars(LinkableLists<T1>& ints, LinkableLists<T2>& chars, LinkableLists<T3>& doubles);
 
+template<typename T1, typename T2, typename T3>
+void runMenuWizardDoubles(LinkableLists<T1>& ints, LinkableLists<T2>& chars, LinkableLists<T3>& doubles);
+
 // === Main Function To Test The LinkableLists Class ===
 // This Function Will Create An Instance Of The LinkableLists Class, And Be Able To 
 // Initialize It With An Array, And Perform Various Operations Like Traversal And Reversal

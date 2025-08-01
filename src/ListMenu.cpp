@@ -38,26 +38,27 @@ template<typename T1, typename T2, typename T3> // Declare The Template Function
             std::cout << "[INFO] Option 9 - Get: Look At Current Element In The List" << std::endl; 
             std::cout << "[INFO] Option 10 - Removal: Eliminate Only That Element In List" << std::endl; 
             std::cout << "[INFO] Option 11 - Clear List: Eliminate All Elements In List" << std::endl; 
+            std::cout << "[INFO] Option 12 - Bubble Sort (Ascending): Sort Elements In List" << std::endl; 
+            std::cout << "[INFO] Option 13 - Bubble Sort (Descending): Sort Elements In List" << std::endl; 
             std::cout << "===============================================================" << std::endl; 
 
             int userChoice; // Variable To Store User Input For The Selected Option
             while (true) // Loop Until Valid Input Is Received
             {
-                std::cout << "[SYSTEM] Waiting For User Inputs: From (1-11)" << std::endl;
+                std::cout << "[SYSTEM] Waiting For User Inputs: From (1-13)" << std::endl;
                 std::cout << "[ACTION] User: Please Make An Input To Console" << std::endl;
 
-                if (std::cin >> userChoice && userChoice >= 0 && userChoice <= 11) 
-                break; // Check If The Input Is Valid (An Integer Between 0 And 11)
+                if (std::cin >> userChoice && userChoice >= 0 && userChoice <= 13) 
+                break; // Check If The Input Is Valid (An Integer Between 0 And 13)
                 // If The Input Is Valid, Break Out Of The Loop      
 
                 std::cin.clear(); // Clear The Error State Of cin
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 std::cout << "[ERROR] Invalid Selection: Try Again." << std::endl;
-                std::cout << "[ACTION] INPUT A Number Between (0-11)" << std::endl;
+                std::cout << "[ACTION] INPUT A Number Between (0-13)" << std::endl;
             }
 
-        // Choose The Appropriate LinkableLists Instance Via Users Choice
-            LinkableLists<int>& myList1 = ints;
+            LinkableLists<int>& myList1 = ints; // Choose The Appropriate LinkableLists Instance Via Users Choice
 
             if (userChoice == 1) { // Search
                 int inputData; // Search Function Should Receive User Input To Search Linkable List myList1  
@@ -159,7 +160,21 @@ template<typename T1, typename T2, typename T3> // Declare The Template Function
                 continue; 
             }
 
-            else if (userChoice == 0) { // Quit
+            if (userChoice == 12) { // Sort List In Ascending Order
+
+                std::cout << "[SYSTEM] User Made Selection For Sort List: Ascending Order" << std::endl;
+                myList1.sortList(true); // Sort The List In Ascending Order
+                continue; 
+            }
+
+            if (userChoice == 13) { // Sort List In Descending Order
+
+                std::cout << "[SYSTEM] User Made Selection For Sort List: Descending Order" << std::endl;
+                myList1.sortList(false); // Sort The List In Descending Order
+                continue; 
+            }
+
+            else if (userChoice == 0) { // Returning To Main Menu
 
                 std::cout << "[SYSTEM] Leaving LinkableList Ints Wizard...." << std::endl;
                 std::cout << "[SYSTEM] Selection Made: Returning To Starter Menu...." << std::endl;
@@ -190,24 +205,26 @@ template<typename T1, typename T2, typename T3> // Declare The Template Function
             std::cout << "[INFO] Option 9 - Get: Look At Current Element In The List" << std::endl; 
             std::cout << "[INFO] Option 10 - Removal: Eliminate Only That Element In List" << std::endl; 
             std::cout << "[INFO] Option 11 - Clear List: Eliminate All Elements In List" << std::endl; 
+            std::cout << "[INFO] Option 12 - Bubble Sort (Ascending): Sort Elements In List" << std::endl; 
+            std::cout << "[INFO] Option 13 - Bubble Sort (Descending): Sort Elements In List" << std::endl;
             std::cout << "===============================================================" << std::endl; 
 
             int userChoice;
             while (true)
             {
-                std::cout << "[SYSTEM] Waiting For User Inputs: From (1-11)" << std::endl;
+                std::cout << "[SYSTEM] Waiting For User Inputs: From (1-13)" << std::endl;
                 std::cout << "[ACTION] User: Please Make An Input To Console" << std::endl;
 
-                if (std::cin >> userChoice && userChoice >= 0 && userChoice <= 11)
+                if (std::cin >> userChoice && userChoice >= 0 && userChoice <= 13)
                 break;
 
                 std::cin.clear();
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 std::cout << "[ERROR] Invalid Selection: Try Again." << std::endl;
-                std::cout << "[ACTION] INPUT A Number Between (0-11)" << std::endl;
+                std::cout << "[ACTION] INPUT A Number Between (0-13)" << std::endl;
             }
 
-            LinkableLists<double>& myList3 = doubles;
+            LinkableLists<double>& myList3 = doubles; // Choose The Appropriate LinkableLists Instance Via Users Choice
 
             if (userChoice == 1) { // Search
                 double inputData;
@@ -292,7 +309,21 @@ template<typename T1, typename T2, typename T3> // Declare The Template Function
                 continue;
             }
 
-            else if (userChoice == 0) { // Quit
+            if (userChoice == 12) { // Sort List In Ascending Order
+
+                std::cout << "[SYSTEM] User Made Selection For Sort List: Ascending Order" << std::endl;
+                myList3.sortList(true); // Sort The List In Ascending Order
+                continue; 
+            }
+
+            if (userChoice == 13) { // Sort List In Descending Order
+
+                std::cout << "[SYSTEM] User Made Selection For Sort List: Descending Order" << std::endl;
+                myList3.sortList(false); // Sort The List In Descending Order
+                continue; 
+            }
+
+            else if (userChoice == 0) { // Returning To Main Menu
                 std::cout << "[SYSTEM] Leaving LinkableList Doubles Wizard...." << std::endl;
                 std::cout << "[SYSTEM] Selection Made: Returning To Starter Menu...." << std::endl;
                 break;
@@ -328,26 +359,27 @@ template<typename T1, typename T2, typename T3> // Declare The Template Function
             std::cout << "[INFO] Option 9 - Get: Look At Current Element In The List" << std::endl; 
             std::cout << "[INFO] Option 10 - Removal: Eliminate Only That Element In List" << std::endl; 
             std::cout << "[INFO] Option 11 - Clear List: Eliminate All Elements In List" << std::endl; 
+            std::cout << "[INFO] Option 12 - Bubble Sort (Ascending): Sort Elements In List" << std::endl; 
+            std::cout << "[INFO] Option 13 - Bubble Sort (Descending): Sort Elements In List" << std::endl;
             std::cout << "===============================================================" << std::endl; 
 
             int userChoice; // Variable To Store User Input For The Selected Option
             while (true) // Loop Until Valid Input Is Received
             {
-                std::cout << "[SYSTEM] Waiting For User Inputs: From (1-11)" << std::endl;
+                std::cout << "[SYSTEM] Waiting For User Inputs: From (1-13)" << std::endl;
                 std::cout << "[ACTION] User: Please Make An Input To Console" << std::endl;
 
-                if (std::cin >> userChoice && userChoice >= 0 && userChoice <= 11) 
-                break; // Check If The Input Is Valid (An Integer Between 0 And 11)
+                if (std::cin >> userChoice && userChoice >= 0 && userChoice <= 13) 
+                break; // Check If The Input Is Valid (An Integer Between 0 And 13)
                 // If The Input Is Valid, Break Out Of The Loop      
 
                 std::cin.clear(); // Clear The Error State Of cin
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 std::cout << "[ERROR] Invalid Selection: Try Again." << std::endl;
-                std::cout << "[ACTION] INPUT A Number Between (0-11)" << std::endl;
+                std::cout << "[ACTION] INPUT A Number Between (0-13)" << std::endl;
             }
 
-            // Choose The Appropriate LinkableLists Instance Via Users Choice
-            LinkableLists<char>& myList2 = chars;
+            LinkableLists<char>& myList2 = chars; // Choose The Appropriate LinkableLists Instance Via Users Choice
 
             if (userChoice == 1) { // Search
                 char inputData; // Search Function Should Receive User Input To Search Linkable List myList2
@@ -449,7 +481,21 @@ template<typename T1, typename T2, typename T3> // Declare The Template Function
                 continue;
             }
 
-            else if (userChoice == 0) { // Quit
+            if (userChoice == 12) { // Sort List In Ascending Order
+
+                std::cout << "[SYSTEM] User Made Selection For Sort List: Ascending Order" << std::endl;
+                myList2.sortList(true); // Sort The List In Ascending Order
+                continue; 
+            }
+
+            if (userChoice == 13) { // Sort List In Descending Order
+
+                std::cout << "[SYSTEM] User Made Selection For Sort List: Descending Order" << std::endl;
+                myList2.sortList(false); // Sort The List In Descending Order
+                continue; 
+            }
+
+            else if (userChoice == 0) { // Returning To Main Menu
 
                 std::cout << "[SYSTEM] Leaving LinkableList Chars Wizard...." << std::endl;
                 std::cout << "[SYSTEM] Selection Made: Returning To Starter Menu...." << std::endl;
@@ -471,7 +517,7 @@ void startMenu(LinkableLists<T1>& ints, LinkableLists<T2>& chars, LinkableLists<
         std::cout << "================== [2]  Operate on CHAR list............................." << std::endl;
         std::cout << "================== [3]  Operate on DOUBLE list..........................." << std::endl;
         std::cout << "================== [0]  Quit program....................................." << std::endl;
-        std::cout << "==========================================================================" << std::endl;
+        std::cout << "=========================================================================" << std::endl;
          
             int userChoice; // Variable To Store User Input For The Selected Option
             while (true) // Loop Until Valid Input Is Received
